@@ -29,7 +29,7 @@ storiesOf('Observable', module)
         { x: 70, d: 3 }
       ],
       number('End', 80),
-      number('Completion', 1)
+      number('Completion', 80)
     )
 
     return (
