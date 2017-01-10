@@ -1,12 +1,12 @@
 import React from 'react'
 import { storiesOf } from '@kadira/storybook'
-import ObservableView from './observable'
+import ObservableView from './view'
 
 storiesOf('<ObservableView/>', module)
   .add('default', () => (
     <ObservableView
-      width={700}
-      height={150}
+      width={500}
+      height={50}
       emissions={[
         { x: 0, d: 'A' },
         { x: 0.25, d: 'B' },

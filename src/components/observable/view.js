@@ -1,57 +1,19 @@
-import React, { PureComponent } from 'react'
-import Color from 'goethe'
+import React from 'react'
 import styled from 'styled-components'
 
-import { white, blue, black, gray } from '../constants/colors'
-import { fontFamily, fontSize } from '../constants/font'
-import scaleVector from '../utils/scaleVector'
-import points from '../utils/points'
-import repeat from '../utils/repeat'
+import { EMISSION_RADIUS } from './constants'
+import { white, blue, black, gray } from '../../constants/colors'
+import scaleVector from '../../utils/scaleVector'
+import points from '../../utils/points'
+import repeat from '../../utils/repeat'
 
-const leftGradientColor = Color([ 227, 89, 18 ]).lighten(.13)
-const rightGradientColor = Color([ 197, 5, 59 ]).lighten(.13)
+import Defs from './defs'
+import Emission from './emission'
 
 const PADDING_FACTOR = 0.03
 const ARROW_FACTOR = 0.06
-const EMISSION_RADIUS = 0.28
 const SEPARATORS = 20
 const COMPLETION_HEIGHT = 8 * EMISSION_RADIUS
-
-const Text = styled.text`
-  font-family: ${fontFamily};
-  font-size: ${({ height }) => `${height * 0.24}px`};
-  line-height: ${fontSize};
-  user-select: none;
-`
-
-const Emission = ({
-  x,
-  d,
-  width,
-  height
-}) => (
-  <g>
-    <circle
-      cx={x * width}
-      cy={height / 2}
-      r={EMISSION_RADIUS * height}
-      fill={white.opacity(.95)}
-      stroke="url(#bg)"
-      strokeWidth={2}
-    />
-
-    <Text
-      x={x * width}
-      y={height / 2}
-      height={height}
-      dy={0.08 * height}
-      textAnchor="middle"
-      stroke={black}
-    >
-      {d}
-    </Text>
-  </g>
-)
 
 const ObservableView = ({
   width = 500,
@@ -71,17 +33,7 @@ const ObservableView = ({
       width={width}
       height={height}
     >
-      <defs>
-        <linearGradient id="bg">
-          <stop offset="0%" stopColor={leftGradientColor}/>
-          <stop offset="100%" stopColor={rightGradientColor}/>
-        </linearGradient>
-
-        <linearGradient id="completion">
-          <stop offset="0%" stopColor={gray.opacity(0.8)}/>
-          <stop offset="100%" stopColor={gray.opacity(0.001)}/>
-        </linearGradient>
-      </defs>
+      <Defs/>
 
       <polygon
         points={points([
@@ -122,6 +74,7 @@ const ObservableView = ({
             key={i}
             width={width}
             height={height}
+            stroke="url(#bg)"
             x={transformFactor(x)}
             d={d}
           />
