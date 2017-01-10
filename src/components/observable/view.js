@@ -1,19 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { EMISSION_RADIUS } from './constants'
 import { white, blue, black, gray } from '../../constants/colors'
 import scaleVector from '../../utils/scaleVector'
 import points from '../../utils/points'
 import repeat from '../../utils/repeat'
 
+import { EMISSION_RADIUS } from './constants'
 import Defs from './defs'
 import Emission from './emission'
+import Completion from './completion'
 
 const PADDING_FACTOR = 0.03
 const ARROW_FACTOR = 0.06
 const SEPARATORS = 20
-const COMPLETION_HEIGHT = 8 * EMISSION_RADIUS
 
 const ObservableView = ({
   width = 500,
@@ -60,12 +60,10 @@ const ObservableView = ({
         ))
       }
 
-      <rect
-        fill={gray}
-        width={3}
-        height={COMPLETION_HEIGHT * height}
-        x={transformFactor(completion) * width - 1}
-        y={(0.5 - COMPLETION_HEIGHT / 2) * height}
+      <Completion
+        x={transformFactor(completion)}
+        height={height}
+        width={width}
       />
 
       {

@@ -1,8 +1,9 @@
 import React from 'react'
-import Color from 'goethe'
 
-const leftGradientColor = Color([ 227, 89, 18 ]).lighten(.13)
-const rightGradientColor = Color([ 197, 5, 59 ]).lighten(.13)
+import {
+  leftGradientColor,
+  rightGradientColor
+} from './constants'
 
 const Defs = () => (
   <defs>
