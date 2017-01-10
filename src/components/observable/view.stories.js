@@ -1,20 +1,22 @@
 import React from 'react'
 import { storiesOf } from '@kadira/storybook'
+import { withKnobs, number } from '@kadira/storybook-addon-knobs';
 import ObservableView from './view'
 import fromEmissions from './fromEmissions'
 
 storiesOf('Observable', module)
+  .addDecorator(withKnobs)
   .add('View', () => (
     <ObservableView
-      width={500}
-      height={50}
+      width={number('Width', 500)}
+      height={number('Height', 50)}
       emissions={[
         { x: 0, d: 'A' },
         { x: 0.25, d: 'B' },
         { x: 0.5, d: 'C' },
         { x: 0.75, d: 'D' }
       ]}
-      completion={0.75}
+      completion={number('Completion', 0.75)}
     />
   ))
   .add('fromEmissions', () => {
@@ -26,5 +28,11 @@ storiesOf('Observable', module)
       { x: 70, d: 3 }
     ], 80)
 
-    return <View width={500} height={50}/>
+    return (
+      <View
+        width={number('Width', 500)}
+        height={number('Height', 50)}
+        scale={number('Scale', 1)}
+      />
+    )
   })

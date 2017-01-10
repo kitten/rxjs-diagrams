@@ -7,7 +7,7 @@ import { fontFamily, fontSize } from '../../constants/font'
 
 const Text = styled.text`
   font-family: ${fontFamily};
-  font-size: ${({ height }) => `${height * 0.24}px`};
+  font-size: ${props => `${props.height * 0.24}px`};
   line-height: ${fontSize};
   user-select: none;
 `
