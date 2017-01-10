@@ -22,6 +22,7 @@ const ObservableView = ({
   height = 200,
   scale = 1,
   completion = 1,
+  isCompleted = true,
   emissions = []
 }) => {
   const boundedPadding = (PADDING_FACTOR * width > EMISSION_RADIUS * height) ? PADDING_FACTOR : (EMISSION_RADIUS * height) / width
@@ -63,11 +64,13 @@ const ObservableView = ({
         ))
       }
 
-      <Completion
-        x={transformFactor(completion)}
-        height={height}
-        width={width}
-      />
+      { isCompleted && (
+        <Completion
+          x={transformFactor(completion)}
+          height={height}
+          width={width}
+        />
+      )}
 
       {
         emissions.map(({ x, d }, i) => (

@@ -12,7 +12,7 @@ const isEmission = (obj) => (
 
 const selectValue = obj => obj.x
 
-function fromEmissions(arr, end) {
+function fromEmissions(arr, end, completion) {
   if (!Array.isArray(arr) || !arr.every(isEmission)) {
     throw new Error([
       'Expected each value in `emissions` to be an emission',
@@ -34,12 +34,12 @@ function fromEmissions(arr, end) {
       x: x / range - minFactor
     }))
 
-  const completion = max / range - minFactor
+  const _completion = typeof completion === 'number' ? completion : (max / range - minFactor)
 
   return props => (
     <ObservableView
       {...props}
-      completion={completion}
+      completion={_completion}
       emissions={emissions}
     />
   )
