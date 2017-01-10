@@ -5,8 +5,8 @@ import ObservableView from './observable'
 storiesOf('<ObservableView/>', module)
   .add('default', () => (
     <ObservableView
-      width={500}
-      height={50}
+      width={700}
+      height={150}
       emissions={[
         { x: 0, d: 'A' },
         { x: 0.25, d: 'B' },
