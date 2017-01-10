@@ -1,6 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@kadira/storybook'
-import { withKnobs, number } from '@kadira/storybook-addon-knobs';
+import { withKnobs, number, boolean } from '@kadira/storybook-addon-knobs';
 import ObservableView from './view'
 import fromEmissions from './fromEmissions'
 
@@ -20,19 +20,22 @@ storiesOf('Observable', module)
     />
   ))
   .add('fromEmissions', () => {
-    const View = fromEmissions([
-      { x: 5, d: 1 },
-      { x: 20, d: 2 },
-      { x: 35, d: 2 },
-      { x: 60, d: 1 },
-      { x: 70, d: 3 }
-    ], 80)
+    const View = fromEmissions(
+      [
+        { x: 5, d: 1 },
+        { x: 20, d: 2 },
+        { x: 35, d: 2 },
+        { x: 60, d: 1 },
+        { x: 70, d: 3 }
+      ],
+      number('End', 80),
+      number('Completion', 1)
+    )
 
     return (
       <View
         width={number('Width', 500)}
         height={number('Height', 50)}
-        scale={number('Scale', 1)}
       />
     )
   })

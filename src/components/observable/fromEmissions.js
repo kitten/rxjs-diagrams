@@ -34,12 +34,10 @@ function fromEmissions(arr, end, completion) {
       x: x / range - minFactor
     }))
 
-  const _completion = typeof completion === 'number' ? completion : (max / range - minFactor)
-
   return props => (
     <ObservableView
       {...props}
-      completion={_completion}
+      completion={Math.min(completion / range, 1)}
       emissions={emissions}
     />
   )
