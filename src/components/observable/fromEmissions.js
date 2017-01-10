@@ -28,6 +28,7 @@ function fromEmissions(arr, end) {
 
   const emissions = arr
     .filter(({ x }) => x <= max)
+    .sort((a, b) => a.x - b.x)
     .map(({ x, ...rest }) => ({
       ...rest,
       x: x / range - minFactor
