@@ -8,8 +8,8 @@ import scaleVector from '../utils/scaleVector'
 import points from '../utils/points'
 import repeat from '../utils/repeat'
 
-const leftGradientColor = Color([ 227, 89, 18 ])
-const rightGradientColor = Color([ 197, 5, 59 ])
+const leftGradientColor = Color([ 227, 89, 18 ]).lighten(.13)
+const rightGradientColor = Color([ 197, 5, 59 ]).lighten(.13)
 
 const PADDING_FACTOR = 0.03
 const ARROW_FACTOR = 0.06
