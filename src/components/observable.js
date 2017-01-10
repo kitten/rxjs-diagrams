@@ -16,11 +16,6 @@ const ARROW_FACTOR = 0.06
 const EMISSION_RADIUS = 0.28
 const SEPARATORS = 20
 const COMPLETION_HEIGHT = 8 * EMISSION_RADIUS
-const UPPER_BOUND = 1 - PADDING_FACTOR - ARROW_FACTOR
-
-const transformFactor = x => (
-  (UPPER_BOUND - PADDING_FACTOR) * x + PADDING_FACTOR
-)
 
 const Text = styled.text`
   font-family: ${fontFamily};
