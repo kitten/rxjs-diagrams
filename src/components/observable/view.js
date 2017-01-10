@@ -20,13 +20,14 @@ const SEPARATORS = 20
 const ObservableView = ({
   width = 500,
   height = 200,
+  scale = 1,
   completion = 1,
   emissions = []
 }) => {
   const boundedPadding = (PADDING_FACTOR * width > EMISSION_RADIUS * height) ? PADDING_FACTOR : (EMISSION_RADIUS * height) / width
   const upperBound = 1 - boundedPadding - ARROW_WIDTH_FACTOR
   const transformFactor = x => (
-    (upperBound - boundedPadding) * x + boundedPadding
+    (upperBound - boundedPadding) * (x / scale) + boundedPadding
   )
 
   return (
