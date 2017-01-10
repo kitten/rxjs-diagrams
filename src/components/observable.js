@@ -24,7 +24,7 @@ const transformFactor = x => (
 
 const Text = styled.text`
   font-family: ${fontFamily};
-  font-size: ${fontSize};
+  font-size: ${({ height }) => `${height * 0.24}px`};
   line-height: ${fontSize};
   user-select: none;
 `
@@ -39,7 +39,7 @@ const Emission = ({
     <circle
       cx={x * width}
       cy={height / 2}
-      r={14}
+      r={0.28 * height}
       fill={white.opacity(.95)}
       stroke="url(#bg)"
       strokeWidth={2}
@@ -48,7 +48,8 @@ const Emission = ({
     <Text
       x={x * width}
       y={height / 2}
-      dy={5}
+      height={height}
+      dy={0.08 * height}
       textAnchor="middle"
       stroke={black}
     >
@@ -82,13 +83,13 @@ const ObservableView = ({
 
     <polygon
       points={points([
-        [ 0, `${height / 2 - 5}` ],
-        [ 1 - ARROW_FACTOR, `${height / 2 - 5}` ],
-        [ 1 - ARROW_FACTOR, `${height / 2 - 12}` ],
+        [ 0, `${height / 2 - (0.1 * height)}` ],
+        [ 1 - ARROW_FACTOR, `${height / 2 - (0.1 * height)}` ],
+        [ 1 - ARROW_FACTOR, `${height / 2 - (0.24 * height)}` ],
         [ 1, 0.5 ],
-        [ 1 - ARROW_FACTOR, `${height / 2 + 12}` ],
-        [ 1 - ARROW_FACTOR, `${height / 2 + 5}` ],
-        [ 0, `${height / 2 + 5}` ]
+        [ 1 - ARROW_FACTOR, `${height / 2 + (0.24 * height)}` ],
+        [ 1 - ARROW_FACTOR, `${height / 2 + (0.1 * height)}` ],
+        [ 0, `${height / 2 + (0.1 * height)}` ]
       ].map(scaleVector(width, height)))}
       fill="url(#bg)"
     />
