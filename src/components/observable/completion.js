@@ -5,7 +5,7 @@ import {
   EMISSION_RADIUS
 } from './constants'
 
-const COMPLETION_HEIGHT = 6 * EMISSION_RADIUS
+const COMPLETION_HEIGHT = 2.4 * EMISSION_RADIUS
 
 const Completion = ({
   x,
