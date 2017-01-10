@@ -1,0 +1,23 @@
+# Node
+node_modules
+*.log
+
+# Ignore all dotfiles, except...
+/.*
+!.editorconfig
+!.gitignore
+!.jestrc.json
+!.travis.yml
+!.npmignore
+!.storybook
+
+# Ignore all js files in root, except...
+/*.js
+
+# Build folders
+lib/
+es/
+dist/
+coverage/
+_book/
+
