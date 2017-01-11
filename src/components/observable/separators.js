@@ -26,7 +26,7 @@ const Separators = ({ height, width, transformFactor }) => (
               x2={x2}
               y2={0.5 * height}
               strokeWidth={1}
-              stroke={white.opacity(.75)}
+              stroke={white.opacity(.63)}
             />
             <line
               x1={x2}
@@ -34,7 +34,7 @@ const Separators = ({ height, width, transformFactor }) => (
               x2={x1}
               y2={(0.5 + HEIGHT_FACTOR) * height}
               strokeWidth={1}
-              stroke={white.opacity(.75)}
+              stroke={white.opacity(.63)}
             />
           </g>
         )
