@@ -1,7 +1,5 @@
 import { Observable } from 'rxjs/Observable'
-import { of } from 'rxjs/observable/of'
 import { merge } from 'rxjs/observable/merge'
-import { delay } from 'rxjs/operator/delay'
 import { takeUntil } from 'rxjs/operator/takeUntil'
 import { share } from 'rxjs/operator/share'
 
@@ -20,7 +18,7 @@ const makeVirtualStream = (scheduler, diagram) => {
     makeVirtualEmission(scheduler, d, x)
   ))
 
-  const completion$ = of(null)::delay(completion, scheduler)
+  const completion$ = makeVirtualEmission(scheduler, null, completion)
 
   const emission$ = merge(...partials)
     ::takeUntil(completion$)
