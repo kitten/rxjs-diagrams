@@ -16,7 +16,9 @@ const Completion = ({
   x,
   height,
   width,
-  bold
+  bold,
+  onMouseUp,
+  onMouseDown
 }) => (
   <rect
     fill={generateColor(x)}
@@ -24,6 +26,12 @@ const Completion = ({
     height={(bold ? BOLD_FACTOR : 1) * COMPLETION_HEIGHT * height}
     x={x * width - 1}
     y={(0.5 - (bold ? BOLD_FACTOR : 1) * COMPLETION_HEIGHT / 2) * height}
+    onMouseDown={evt => {
+      onMouseDown && onMouseDown({ x }, evt)
+    }}
+    onMouseUp={evt => {
+      onMouseUp && onMouseUp({ x }, evt)
+    }}
   />
 )
 

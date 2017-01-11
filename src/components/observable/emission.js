@@ -17,7 +17,10 @@ const Emission = ({
   d,
   width,
   height,
-  stroke = "url(#bg)"
+  stroke = "url(#bg)",
+  onMouseUp,
+  onMouseDown,
+  ...rest
 }) => (
   <g>
     <circle
@@ -27,6 +30,12 @@ const Emission = ({
       fill={white.opacity(.95)}
       stroke={stroke}
       strokeWidth={2}
+      onMouseDown={evt => {
+        onMouseDown && onMouseDown({ ...rest, x, d }, evt)
+      }}
+      onMouseUp={evt => {
+        onMouseUp && onMouseUp({ ...rest, x, d }, evt)
+      }}
     />
 
     <Text

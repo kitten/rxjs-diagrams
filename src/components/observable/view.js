@@ -55,8 +55,9 @@ const ObservableView = ({
       )}
 
       {
-        emissions.map(({ x, d }, i) => (
+        emissions.map(({ x, d, ...rest }, i) => (
           <Emission
+            {...rest}
             key={i}
             width={width}
             height={height}
