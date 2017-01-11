@@ -143,7 +143,7 @@ storiesOf('Emissions', module)
       <div>
         <EmissionsView
           emissions={input}
-          end={width}
+          end={width + 5}
           completion={width}
         />
 
@@ -152,7 +152,7 @@ storiesOf('Emissions', module)
           transform={({ emissions, completion }) => (
             <EmissionsView
               emissions={emissions}
-              end={width}
+              end={width + 5}
               completion={completion}
             />
           )}
