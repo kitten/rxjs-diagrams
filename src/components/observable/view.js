@@ -2,17 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { white, blue, black, gray } from '../../constants/colors'
-import repeat from '../../utils/repeat'
 
 import {
-  HEIGHT_FACTOR,
   EMISSION_RADIUS,
-  ARROW_HEIGHT_FACTOR,
   ARROW_WIDTH_FACTOR
 } from './constants'
 
 import Defs from './defs'
 import Arrow from './arrow'
+import Separators from './separators'
 import Emission from './emission'
 import Completion from './completion'
 
@@ -40,18 +38,7 @@ const ObservableView = ({
     >
       <Defs/>
       <Arrow height={height} width={width}/>
-
-      {
-        repeat(boundedPadding, upperBound, SEPARATORS).map(x => (
-          <rect
-            fill={white.opacity(.75)}
-            width={1}
-            height={HEIGHT_FACTOR * 2 * height}
-            x={Math.round(x * width)}
-            y={(0.5 - HEIGHT_FACTOR) * height}
-          />
-        ))
-      }
+      <Separators height={height} width={width} transformFactor={transformFactor}/>
 
       { completion && (
         <Completion
