@@ -1,6 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@kadira/storybook'
 import { withKnobs, number, boolean } from '@kadira/storybook-addon-knobs';
+
 import ObservableView from './view'
 import fromEmissions from './fromEmissions'
 
@@ -39,3 +40,4 @@ storiesOf('Observable', module)
       />
     )
   })
+

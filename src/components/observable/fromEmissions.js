@@ -1,19 +1,11 @@
 import React from 'react'
 import ObservableView from './view'
-
-const isEmission = (obj) => (
-  typeof obj === 'object' &&
-  typeof obj.x === 'number' &&
-  obj.x === obj.x &&
-  obj.x > 0 &&
-  obj.d !== undefined &&
-  obj.d !== null
-)
+import { isEmissionsArr } from '../../utils/isEmissionsArr'
 
 const selectValue = obj => obj.x
 
 function fromEmissions(arr, end, completion) {
-  if (!Array.isArray(arr) || !arr.every(isEmission)) {
+  if (!isEmissionsArr(arr)) {
     throw new Error([
       'Expected each value in `emissions` to be an emission',
       '({ x: [number], d: [string] })'

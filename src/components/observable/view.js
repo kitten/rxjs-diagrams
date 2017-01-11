@@ -19,7 +19,7 @@ const SEPARATORS = 20
 
 const ObservableView = ({
   width = 500,
-  height = 200,
+  height = 50,
   scale = 1,
   completion = 1,
   emissions = []
