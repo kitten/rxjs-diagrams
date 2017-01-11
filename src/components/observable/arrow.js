@@ -11,13 +11,13 @@ import {
 const Arrow = ({ height, width }) => (
   <polygon
     points={points([
-      [ 0, `${height / 2 - (HEIGHT_FACTOR * height)}` ],
-      [ 1 - ARROW_WIDTH_FACTOR, `${height / 2 - (HEIGHT_FACTOR * height)}` ],
-      [ 1 - ARROW_WIDTH_FACTOR, `${height / 2 - (ARROW_HEIGHT_FACTOR * height)}` ],
+      [ 0, 0.5 - HEIGHT_FACTOR ],
+      [ 1 - ARROW_WIDTH_FACTOR, 0.5 - HEIGHT_FACTOR ],
+      [ 1 - ARROW_WIDTH_FACTOR, 0.5 - ARROW_HEIGHT_FACTOR ],
       [ 1, 0.5 ],
-      [ 1 - ARROW_WIDTH_FACTOR, `${height / 2 + (ARROW_HEIGHT_FACTOR * height)}` ],
-      [ 1 - ARROW_WIDTH_FACTOR, `${height / 2 + (HEIGHT_FACTOR * height)}` ],
-      [ 0, `${height / 2 + (HEIGHT_FACTOR * height)}` ]
+      [ 1 - ARROW_WIDTH_FACTOR, 0.5 + ARROW_HEIGHT_FACTOR ],
+      [ 1 - ARROW_WIDTH_FACTOR, 0.5 + HEIGHT_FACTOR ],
+      [ 0, 0.5 + HEIGHT_FACTOR ]
     ].map(scaleVector(width, height)))}
     fill="url(#bg)"
   />
