@@ -9,7 +9,7 @@ import { scan } from 'rxjs/operator/scan'
 
 import ObservableRenderer from '../../components/ObservableRenderer'
 import { transformEmissions } from './index'
-import { fromEmissions } from '../../components/observable'
+import { EmissionsView } from '../../components/observable'
 
 storiesOf('Emissions', module)
   .add('.distinctUntilChanged()', () => {
@@ -28,18 +28,23 @@ storiesOf('Emissions', module)
       input
     )
 
-    const Input = fromEmissions(input, width, width)
-
     return (
       <div>
-        <Input/>
+        <EmissionsView
+          emissions={input}
+          end={width}
+          completion={width}
+        />
 
         <ObservableRenderer
           source={output}
-          transform={({ emissions, completion }) => {
-            const View = fromEmissions(emissions, width, completion)
-            return <View/>
-          }}
+          transform={({ emissions, completion }) => (
+            <EmissionsView
+              emissions={emissions}
+              end={width}
+              completion={completion}
+            />
+          )}
         />
       </div>
     )
@@ -60,18 +65,23 @@ storiesOf('Emissions', module)
       input
     )
 
-    const Input = fromEmissions(input, width, width)
-
     return (
       <div>
-        <Input/>
+        <EmissionsView
+          emissions={input}
+          end={width}
+          completion={width}
+        />
 
         <ObservableRenderer
           source={output}
-          transform={({ emissions, completion }) => {
-            const View = fromEmissions(emissions, width, completion)
-            return <View/>
-          }}
+          transform={({ emissions, completion }) => (
+            <EmissionsView
+              emissions={emissions}
+              end={width}
+              completion={completion}
+            />
+          )}
         />
       </div>
     )
@@ -92,18 +102,23 @@ storiesOf('Emissions', module)
       input
     )
 
-    const Input = fromEmissions(input, width, width)
-
     return (
       <div>
-        <Input/>
+        <EmissionsView
+          emissions={input}
+          end={width}
+          completion={width}
+        />
 
         <ObservableRenderer
           source={output}
-          transform={({ emissions, completion }) => {
-            const View = fromEmissions(emissions, width, completion)
-            return <View/>
-          }}
+          transform={({ emissions, completion }) => (
+            <EmissionsView
+              emissions={emissions}
+              end={width}
+              completion={completion}
+            />
+          )}
         />
       </div>
     )
@@ -124,18 +139,23 @@ storiesOf('Emissions', module)
       input
     )
 
-    const Input = fromEmissions(input, width, width)
-
     return (
       <div>
-        <Input/>
+        <EmissionsView
+          emissions={input}
+          end={width}
+          completion={width}
+        />
 
         <ObservableRenderer
           source={output}
-          transform={({ emissions, completion }) => {
-            const View = fromEmissions(emissions, width, completion)
-            return <View/>
-          }}
+          transform={({ emissions, completion }) => (
+            <EmissionsView
+              emissions={emissions}
+              end={width}
+              completion={completion}
+            />
+          )}
         />
       </div>
     )
@@ -165,20 +185,28 @@ storiesOf('Emissions', module)
       inputB
     )
 
-    const InputA = fromEmissions(inputA, width, width)
-    const InputB = fromEmissions(inputB, width, width)
-
     return (
       <div>
-        <InputA/>
-        <InputB/>
+        <EmissionsView
+          emissions={inputA}
+          end={width}
+          completion={width}
+        />
+        <EmissionsView
+          emissions={inputB}
+          end={width}
+          completion={width}
+        />
 
         <ObservableRenderer
           source={output}
-          transform={({ emissions, completion }) => {
-            const View = fromEmissions(emissions, width, completion)
-            return <View/>
-          }}
+          transform={({ emissions, completion }) => (
+            <EmissionsView
+              emissions={emissions}
+              end={width}
+              completion={completion}
+            />
+          )}
         />
       </div>
     )
@@ -201,18 +229,23 @@ storiesOf('Emissions', module)
       input
     )
 
-    const Input = fromEmissions(input, width, width)
-
     return (
       <div>
-        <Input/>
+        <EmissionsView
+          emissions={input}
+          end={width}
+          completion={width}
+        />
 
         <ObservableRenderer
           source={output}
-          transform={({ emissions, completion }) => {
-            const View = fromEmissions(emissions, width, completion)
-            return <View/>
-          }}
+          transform={({ emissions, completion }) => (
+            <EmissionsView
+              emissions={emissions}
+              end={width}
+              completion={completion}
+            />
+          )}
         />
       </div>
     )
