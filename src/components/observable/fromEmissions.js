@@ -16,7 +16,7 @@ function fromEmissions(arr, range, completion) {
   const max = typeof range === 'number' ? range : Math.max.apply(null, arr.map(selectValue))
 
   const emissions = arr
-    .filter(({ x }) => x <= max)
+    .filter(({ x }) => x <= completion)
     .sort((a, b) => a.x - b.x)
     .map(({ x, ...rest }) => ({
       ...rest,
