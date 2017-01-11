@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { white, blue, black, gray } from '../../constants/colors'
-import points from '../../utils/points'
 import repeat from '../../utils/repeat'
 
 import {
@@ -47,9 +46,9 @@ const ObservableView = ({
           <rect
             fill={white.opacity(.75)}
             width={1}
-            height={height}
+            height={HEIGHT_FACTOR * 2 * height}
             x={Math.round(x * width)}
-            y={0}
+            y={(0.5 - HEIGHT_FACTOR) * height}
           />
         ))
       }
