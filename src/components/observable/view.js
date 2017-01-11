@@ -41,7 +41,7 @@ const ObservableView = ({
       width={width}
       height={height}
     >
-      <Defs/>
+      <Defs x={transformFactor(completion)}/>
       <Arrow height={height} width={width}/>
       <Separators height={height} width={width} transformFactor={transformFactor}/>
 
@@ -61,7 +61,7 @@ const ObservableView = ({
             key={i}
             width={width}
             height={height}
-            stroke="url(#bg)"
+            stroke="url(#stroke)"
             x={transformFactor(x)}
             d={d}
           />
