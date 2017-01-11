@@ -41,7 +41,7 @@ const ObservableView = ({
       width={width}
       height={height}
     >
-      <Defs x={transformFactor(completion)}/>
+      <Defs x={completion ? transformFactor(completion) : 1}/>
       <Arrow height={height} width={width}/>
       <Separators height={height} width={width} transformFactor={transformFactor}/>
 

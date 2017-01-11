@@ -26,7 +26,11 @@ function fromEmissions(arr, range, completion) {
   return props => (
     <ObservableView
       {...props}
-      completion={completion ? Math.min(completion / max, 1) : 0}
+      completion={(
+        completion && completion <= range ?
+          Math.min(completion / max, 1) :
+          0
+      )}
       emissions={emissions}
     />
   )
