@@ -30,6 +30,9 @@ const ObservableView = ({
     (upperBound - boundedPadding) * (x / scale) + boundedPadding
   )
 
+  const last = emissions[emissions.length - 1]
+  const lastCoincidesCompletion = last.x === completion
+
   return (
     <svg
       viewBox={`0 0 ${width} ${height}`}
@@ -42,6 +45,7 @@ const ObservableView = ({
 
       { completion && (
         <Completion
+          bold={lastCoincidesCompletion}
           x={transformFactor(completion)}
           height={height}
           width={width}

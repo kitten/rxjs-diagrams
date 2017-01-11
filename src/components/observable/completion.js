@@ -14,14 +14,15 @@ const generateColor = x => leftGradientColor
 const Completion = ({
   x,
   height,
-  width
+  width,
+  bold
 }) => (
   <rect
     fill={generateColor(x)}
     width={3}
-    height={COMPLETION_HEIGHT * height}
+    height={(bold ? 1.2 : 1) * COMPLETION_HEIGHT * height}
     x={x * width - 1}
-    y={(0.5 - COMPLETION_HEIGHT / 2) * height}
+    y={(0.5 - (bold ? 1.2 : 1) * COMPLETION_HEIGHT / 2) * height}
   />
 )
 
