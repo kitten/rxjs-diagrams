@@ -9,7 +9,6 @@ const makeVirtualEmission = (scheduler, value, delay) => {
   return new Observable(observer => {
     scheduler.schedule(() => {
       observer.next(value)
-      observer.complete()
     }, delay, value)
   })
 }
