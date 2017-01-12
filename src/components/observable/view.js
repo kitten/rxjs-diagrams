@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 
 import { white, blue, black, gray } from '../../constants/colors'
 
@@ -22,7 +21,9 @@ const ObservableView = ({
   height = 50,
   scale = 1,
   completion = 1,
-  emissions = []
+  emissions = [],
+  onMouseDown,
+  onMouseUp
 }) => {
   const strokeFactor = 2 / height
   const emissionRadius = EMISSION_RADIUS + strokeFactor
@@ -34,6 +35,9 @@ const ObservableView = ({
 
   const last = emissions[emissions.length - 1]
   const lastCoincidesCompletion = last.x === completion
+
+  const leftX = transformFactor(0) * width
+  const rightX = transformFactor(1) * width
 
   return (
     <svg
@@ -64,6 +68,20 @@ const ObservableView = ({
             stroke="url(#stroke)"
             x={transformFactor(x)}
             d={d}
+            onMouseDown={(data) => {
+              onMouseDown && onMouseDown({
+                ...data,
+                leftX,
+                rightX
+              })
+            }}
+            onMouseUp={(data) => {
+              onMouseUp && onMouseUp({
+                ...data,
+                leftX,
+                rightX
+              })
+            }}
           />
         ))
       }

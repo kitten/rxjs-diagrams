@@ -9,7 +9,7 @@ import { scan } from 'rxjs/operator/scan'
 
 import ObservableRenderer from '../../components/ObservableRenderer'
 import { transformEmissions } from './index'
-import { EmissionsView } from '../../components/observable'
+import TransitionView from '../../components/transition/transitionView'
 
 storiesOf('Emissions', module)
   .add('.distinctUntilChanged()', () => {
@@ -30,7 +30,7 @@ storiesOf('Emissions', module)
 
     return (
       <div>
-        <EmissionsView
+        <TransitionView
           emissions={input}
           end={width}
           completion={width}
@@ -39,7 +39,7 @@ storiesOf('Emissions', module)
         <ObservableRenderer
           source={output}
           transform={({ emissions, completion }) => (
-            <EmissionsView
+            <TransitionView
               emissions={emissions}
               end={width}
               completion={completion}
@@ -67,7 +67,7 @@ storiesOf('Emissions', module)
 
     return (
       <div>
-        <EmissionsView
+        <TransitionView
           emissions={input}
           end={width}
           completion={width}
@@ -76,7 +76,7 @@ storiesOf('Emissions', module)
         <ObservableRenderer
           source={output}
           transform={({ emissions, completion }) => (
-            <EmissionsView
+            <TransitionView
               emissions={emissions}
               end={width}
               completion={completion}
@@ -104,7 +104,7 @@ storiesOf('Emissions', module)
 
     return (
       <div>
-        <EmissionsView
+        <TransitionView
           emissions={input}
           end={width}
           completion={width}
@@ -113,7 +113,7 @@ storiesOf('Emissions', module)
         <ObservableRenderer
           source={output}
           transform={({ emissions, completion }) => (
-            <EmissionsView
+            <TransitionView
               emissions={emissions}
               end={width}
               completion={completion}
@@ -141,7 +141,7 @@ storiesOf('Emissions', module)
 
     return (
       <div>
-        <EmissionsView
+        <TransitionView
           emissions={input}
           end={width + 5}
           completion={width}
@@ -150,7 +150,7 @@ storiesOf('Emissions', module)
         <ObservableRenderer
           source={output}
           transform={({ emissions, completion }) => (
-            <EmissionsView
+            <TransitionView
               emissions={emissions}
               end={width + 5}
               completion={completion}
@@ -187,12 +187,12 @@ storiesOf('Emissions', module)
 
     return (
       <div>
-        <EmissionsView
+        <TransitionView
           emissions={inputA}
           end={width}
           completion={width}
         />
-        <EmissionsView
+        <TransitionView
           emissions={inputB}
           end={width}
           completion={width}
@@ -201,7 +201,7 @@ storiesOf('Emissions', module)
         <ObservableRenderer
           source={output}
           transform={({ emissions, completion }) => (
-            <EmissionsView
+            <TransitionView
               emissions={emissions}
               end={width}
               completion={completion}
@@ -231,7 +231,7 @@ storiesOf('Emissions', module)
 
     return (
       <div>
-        <EmissionsView
+        <TransitionView
           emissions={input}
           end={width}
           completion={width}
@@ -240,7 +240,7 @@ storiesOf('Emissions', module)
         <ObservableRenderer
           source={output}
           transform={({ emissions, completion }) => (
-            <EmissionsView
+            <TransitionView
               emissions={emissions}
               end={width}
               completion={completion}

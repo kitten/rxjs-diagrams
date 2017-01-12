@@ -1,16 +1,16 @@
 import React from 'react'
-import styled from 'styled-components'
 
 import { EMISSION_RADIUS } from './constants'
 import { white, black } from '../../constants/colors'
 import { fontFamily, fontSize } from '../../constants/font'
 
-const Text = styled.text`
-  font-family: ${fontFamily};
-  font-size: ${props => `${props.height * 0.24}px`};
-  line-height: ${fontSize};
-  user-select: none;
-`
+const textStyle = height => ({
+  fontFamily,
+  fontSize: `${height * 0.24}px`,
+  lineHeight: `${height * 0.24}px`,
+  userSelect: 'none',
+  pointerEvents: 'none'
+})
 
 const Emission = ({
   x,
@@ -30,24 +30,24 @@ const Emission = ({
       fill={white.opacity(.95)}
       stroke={stroke}
       strokeWidth={2}
-      onMouseDown={evt => {
-        onMouseDown && onMouseDown({ ...rest, x, d }, evt)
+      onMouseDown={() => {
+        onMouseDown && onMouseDown({ ...rest, x, d })
       }}
-      onMouseUp={evt => {
-        onMouseUp && onMouseUp({ ...rest, x, d }, evt)
+      onMouseUp={() => {
+        onMouseUp && onMouseUp({ ...rest, x, d })
       }}
     />
 
-    <Text
+    <text
       x={x * width}
       y={height / 2}
-      height={height}
       dy={0.08 * height}
       textAnchor="middle"
       stroke={black}
+      style={textStyle(height)}
     >
       {d}
-    </Text>
+    </text>
   </g>
 )
 

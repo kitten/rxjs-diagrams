@@ -2,11 +2,25 @@
   "name": "rxjs-diagrams",
   "version": "0.1.0",
   "description": "React components for visualising RxJS observables and operators",
-  "main": "index.js",
-  "author": "Phil Pluckthun <phil@plckthn.me>",
+  "main": "lib/index.js",
+  "jsnext:main": "es/index.js",
+  "module": "es/index.js",
+  "author": "Phil Plückthun <phil@plckthn.me> (https://github.com/philpl)",
+  "bugs": {
+    "url": "https://github.com/philpl/rxjs-diagrams/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/philpl/rxjs-diagrams.git"
+  },
   "license": "MIT",
   "scripts": {
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "clean": "rimraf es lib dist",
+    "build:cjs": "BABEL_ENV=commonjs babel src --out-dir lib",
+    "build:es": "babel src --out-dir es",
+    "build:umd": "webpack -c webpack.umd.js src/index.js dist/rxjs-diagrams.js",
+    "build": "npm-run-all --parallel build:cjs build:es build:umd"
   },
   "peerDependencies": {
     "react": ">=15.4.2",
@@ -18,17 +32,25 @@
     "@kadira/storybook-addons": "^1.6.1",
     "babel-cli": "^6.18.0",
     "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-external-helpers": "^6.18.0",
     "babel-preset-philpl": "^0.5.0",
+    "cross-env": "^3.1.4",
     "eslint": "^3.13.0",
     "eslint-config-excellence": "^1.17.1",
     "eslint-plugin-react": "^6.9.0",
+    "npm-run-all": "^4.0.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "rxjs": "^5.0.3"
+    "rxjs": "^5.0.3",
+    "webpack": "2.2.0-rc.4"
   },
   "dependencies": {
     "goethe": "^1.2.1",
-    "react-motion": "^0.4.7",
-    "styled-components": "^1.2.1"
+    "react-motion": "^0.4.7"
+  },
+  "engines": {
+    "npm": ">= 2.0.0",
+    "node": ">= 0.12.0"
   }
 }
