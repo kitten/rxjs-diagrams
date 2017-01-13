@@ -6,7 +6,8 @@ import OperatorDiagram from './operatorDiagram'
 
 storiesOf('OperatorDiagram', module)
   .add('.distinctUntilChanged()', () => {
-    const end = 80
+    const end = 100
+    const completion = 80
     const emissions = [
       { x: 5, d: 1 },
       { x: 20, d: 2 },
@@ -20,7 +21,7 @@ storiesOf('OperatorDiagram', module)
         emissions={emissions}
         transform={obs => obs::distinctUntilChanged()}
         end={end}
-        completion={end}
+        completion={completion}
       />
     )
   })

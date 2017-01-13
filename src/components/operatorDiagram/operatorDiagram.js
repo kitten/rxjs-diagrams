@@ -7,9 +7,9 @@ class OperatorDiagram extends PureComponent {
   state = {}
 
   processInput = input => {
-    const { transform, end } = this.props
+    const { transform, completion } = this.props
 
-    const output$ = transformEmissions(transform, end, input)
+    const output$ = transformEmissions(transform, completion, input)
 
     output$.subscribe(output => {
       this.setState({ output })
@@ -46,7 +46,6 @@ class OperatorDiagram extends PureComponent {
         <TransitionView
           {...this.props}
           emissions={emissions}
-          end={end}
           completion={completion}
         />
       </div>

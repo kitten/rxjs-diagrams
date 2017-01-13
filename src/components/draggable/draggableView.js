@@ -7,7 +7,6 @@ import { map } from 'rxjs/operator/map'
 
 const mousemove$ = fromEvent(window, 'mousemove')::share()
 const mouseup$ = fromEvent(window, 'mouseup')::share()
-const selectValue = obj => obj.x
 
 class DraggableView extends PureComponent {
   state = {}
@@ -26,14 +25,8 @@ class DraggableView extends PureComponent {
   }
 
   getMax = () => {
-    const { emissions } = this.state
-    const { end } = this.props
-
-    return (
-      typeof end !== 'number' ?
-        Math.max.apply(null, emissions.map(selectValue)) :
-        end
-    )
+    const { end, completion } = this.props
+    return typeof end === 'number' ? end : completion
   }
 
   updateX = (id, x) => {
@@ -62,6 +55,7 @@ class DraggableView extends PureComponent {
     mousemove$
       ::takeUntil(mouseup$)
       ::map(({ clientX }) => {
+        const { completion } = this.props
         const { left } = svg.getBoundingClientRect()
 
         const max = this.getMax()
@@ -72,7 +66,7 @@ class DraggableView extends PureComponent {
 
         return Math.min(
           Math.max(0, newX),
-          max
+          completion
         )
       })
       .subscribe(newX => this.updateX(id, newX))
