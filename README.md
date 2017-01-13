@@ -14,7 +14,7 @@
 ## Roadmap
 
 - [x] Transitions
-- [ ] Dragging
+- [x] Dragging
 - [ ] Full API Completion
 - [ ] Testing
 - [ ] Docs

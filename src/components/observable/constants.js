@@ -1,5 +1,6 @@
 import Color from 'goethe'
 
+export const PADDING_FACTOR = 0.03
 export const HEIGHT_FACTOR = 0.1
 export const ARROW_HEIGHT_FACTOR = 0.24
 export const ARROW_WIDTH_FACTOR = 0.06

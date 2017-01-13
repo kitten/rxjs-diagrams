@@ -12,8 +12,8 @@ import Arrow from './arrow'
 import Separators from './separators'
 import Emission from './emission'
 import Completion from './completion'
+import makeTransformFactor from './makeTransformFactor'
 
-const PADDING_FACTOR = 0.03
 const SEPARATORS = 20
 
 const ObservableView = ({
@@ -23,15 +23,10 @@ const ObservableView = ({
   completion = 1,
   emissions = [],
   onMouseDown,
-  onMouseUp
+  onMouseUp,
+  getRef
 }) => {
-  const strokeFactor = 2 / height
-  const emissionRadius = EMISSION_RADIUS + strokeFactor
-  const boundedPadding = (PADDING_FACTOR * width > emissionRadius * height) ? PADDING_FACTOR : (emissionRadius * height) / width
-  const upperBound = 1 - boundedPadding - ARROW_WIDTH_FACTOR
-  const transformFactor = x => (
-    (upperBound - boundedPadding) * (x / scale) + boundedPadding
-  )
+  const transformFactor = makeTransformFactor({ width, height, scale })
 
   const last = emissions[emissions.length - 1]
   const lastCoincidesCompletion = last.x === completion
@@ -44,6 +39,7 @@ const ObservableView = ({
       viewBox={`0 0 ${width} ${height}`}
       width={width}
       height={height}
+      ref={ref => getRef && getRef(ref)}
     >
       <Defs x={completion ? transformFactor(completion) : 1}/>
       <Arrow height={height} width={width}/>
