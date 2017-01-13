@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/philpl/rxjs-diagrams.git"
   },
-  "license": "MIT",
+  "license": "CC0-1.0",
   "scripts": {
     "storybook": "start-storybook -p 9001 -c .storybook",
     "clean": "rimraf es lib dist",
