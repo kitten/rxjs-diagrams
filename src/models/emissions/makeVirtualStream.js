@@ -18,7 +18,7 @@ const makeVirtualStream = (scheduler, diagram) => {
     makeVirtualEmission(scheduler, d, x)
   ))
 
-  const completion$ = makeVirtualEmission(scheduler, null, completion)
+  const completion$ = makeVirtualEmission(scheduler, null, completion + .0001)
 
   const emission$ = merge(...partials)
     ::takeUntil(completion$)
