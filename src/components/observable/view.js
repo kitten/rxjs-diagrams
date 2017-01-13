@@ -24,7 +24,8 @@ const ObservableView = ({
   emissions = [],
   onMouseDown,
   onMouseUp,
-  getRef
+  getRef,
+  onChange // NOTE: Just for isDraggable
 }) => {
   const transformFactor = makeTransformFactor({ width, height, scale })
 
@@ -58,6 +59,7 @@ const ObservableView = ({
         emissions.map(({ x, d, ...rest }, i) => (
           <Emission
             {...rest}
+            isDraggable={typeof onChange === 'function'}
             key={i}
             width={width}
             height={height}

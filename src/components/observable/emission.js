@@ -4,6 +4,10 @@ import { EMISSION_RADIUS } from './constants'
 import { white, black } from '../../constants/colors'
 import { fontFamily, fontSize } from '../../constants/font'
 
+const circleStyle = isDraggable => ({
+  cursor: isDraggable ? 'ew-resize' : 'default'
+})
+
 const textStyle = height => ({
   fontFamily,
   fontSize: `${height * 0.24}px`,
@@ -20,10 +24,12 @@ const Emission = ({
   stroke = "url(#bg)",
   onMouseUp,
   onMouseDown,
+  isDraggable,
   ...rest
 }) => (
   <g>
     <circle
+      style={circleStyle(isDraggable)}
       cx={x * width}
       cy={height / 2}
       r={EMISSION_RADIUS * height}
