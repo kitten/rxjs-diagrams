@@ -19,7 +19,8 @@
     "clean": "rimraf es lib dist",
     "build:cjs": "BABEL_ENV=commonjs babel src --out-dir lib",
     "build:es": "babel src --out-dir es",
-    "build:umd": "webpack -c webpack.umd.js src/index.js dist/rxjs-diagrams.js",
+    "build:umd": "webpack --config webpack.umd.js src/index.js dist/rxjs-diagrams.js",
+    "postbuild:umd": "./scripts/closure-minify",
     "build": "npm-run-all --parallel build:cjs build:es build:umd"
   },
   "peerDependencies": {
@@ -39,9 +40,11 @@
     "eslint": "^3.13.0",
     "eslint-config-excellence": "^1.17.1",
     "eslint-plugin-react": "^6.9.0",
+    "google-closure-compiler-js": "^20161201.0.0",
     "npm-run-all": "^4.0.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "rimraf": "^2.5.4",
     "rxjs": "^5.0.3",
     "webpack": "2.2.0-rc.4"
   },
