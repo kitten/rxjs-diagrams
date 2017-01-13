@@ -1,0 +1,5 @@
+webpack.umd.js
+.travis.yml
+.editorconfig
+scripts/
+docs/

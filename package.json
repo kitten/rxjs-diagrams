@@ -1,6 +1,6 @@
 {
   "name": "rxjs-diagrams",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React components for visualising RxJS observables and operators",
   "main": "lib/index.js",
   "jsnext:main": "es/index.js",
@@ -21,7 +21,10 @@
     "build:es": "babel src --out-dir es",
     "build:umd": "webpack --config webpack.umd.js src/index.js dist/rxjs-diagrams.js",
     "postbuild:umd": "./scripts/closure-minify",
-    "build": "npm-run-all --parallel build:cjs build:es build:umd"
+    "build": "npm-run-all --parallel build:cjs build:es build:umd",
+    "prepublish": "npm-run-all clean build",
+    "version": "npm-run-all build",
+    "postversion": "git push && git push --tags"
   },
   "peerDependencies": {
     "react": ">=15.4.2",
