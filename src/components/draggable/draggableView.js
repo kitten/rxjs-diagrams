@@ -38,14 +38,21 @@ class DraggableView extends PureComponent {
 
   updateX = (id, x) => {
     const { emissions } = this.state
+    const { onChange } = this.props
+
+    const newEmissions = emissions.map(emission => (
+      emission.id === id ?
+        { ...emission, x } :
+        emission
+    ))
 
     this.setState({
-      emissions: emissions.map(emission => (
-        emission.id === id ?
-          { ...emission, x } :
-          emission
-      ))
+      emissions: newEmissions
     })
+
+    if (onChange) {
+      onChange(newEmissions)
+    }
   }
 
   onMouseDown = ({ id, leftX, rightX }) => {
