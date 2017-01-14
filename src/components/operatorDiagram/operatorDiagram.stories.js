@@ -2,7 +2,10 @@ import React from 'react'
 import { storiesOf } from '@kadira/storybook'
 import { distinctUntilChanged } from 'rxjs/operator/distinctUntilChanged'
 import { delay } from 'rxjs/operator/delay'
+import { switchMap } from 'rxjs/operator/switchMap'
+import { merge } from 'rxjs/operator/merge'
 import { combineLatest } from 'rxjs/observable/combineLatest'
+import { of } from 'rxjs/observable/of'
 import { withKnobs, number } from '@kadira/storybook-addon-knobs';
 
 import OperatorDiagram from './operatorDiagram'
@@ -57,5 +60,20 @@ storiesOf('OperatorDiagram', module)
       end={end}
       completion={completion}
       label=".combineLatest((x, y) => '' + x + y)"
+    />
+  ))
+  .add('.switchMap((x) => Observable.of(x, x + 1))', () => (
+    <OperatorDiagram
+      emissions={[
+        { x: 5, d: 1 },
+        { x: 35, d: 2 },
+        { x: 70, d: 3 }
+      ]}
+      transform={(obs, s) => obs::switchMap(x => (
+        of(x, s)::merge(of(x + 1, s)::delay(10, s))
+      ))}
+      end={end}
+      completion={completion}
+      label=".switchMap((x) => Observable.of(x, x + 1))"
     />
   ))

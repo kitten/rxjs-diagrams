@@ -11,6 +11,14 @@ import {
 
 const PADDING_FACTOR = 0.2
 
+const getInput = emissions => {
+  const hasMultipleInputs = emissions.some(Array.isArray)
+
+  return hasMultipleInputs ?
+      emissions :
+      [ emissions ]
+}
+
 class OperatorDiagram extends PureComponent {
   static propTypes = {
     label: PropTypes.string,
@@ -40,16 +48,6 @@ class OperatorDiagram extends PureComponent {
     })
   }
 
-  initInput = (emissions, completion) => {
-    const hasMultipleInputs = emissions.some(Array.isArray)
-
-    const input = hasMultipleInputs ?
-        emissions :
-        [ emissions ]
-
-    this.processInput(input, completion)
-  }
-
   updateEmissions = (i, emissions) => {
     const input = this.state.input.slice()
     input[i] = emissions
@@ -62,7 +60,7 @@ class OperatorDiagram extends PureComponent {
   }
 
   componentWillMount() {
-    this.initInput(this.props.emissions, this.props.completion)
+    this.processInput(getInput(this.props.emissions), this.props.completion)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -70,7 +68,7 @@ class OperatorDiagram extends PureComponent {
       this.props.emissions !== nextProps.emissions ||
       this.props.completion !== nextProps.completion
     ) {
-      this.initInput(nextProps.emissions, nextProps.completion)
+      this.processInput(getInput(nextProps.emissions), nextProps.completion)
     }
   }
 
@@ -80,12 +78,12 @@ class OperatorDiagram extends PureComponent {
       width,
       height,
       transform,
-      label
+      label,
+      emissions
     } = this.props
 
     const {
       output,
-      input,
       completion
     } = this.state
 
@@ -93,6 +91,7 @@ class OperatorDiagram extends PureComponent {
       return null
     }
 
+    const input = getInput(emissions)
     const totalHeight = height * (2 + input.length) + 2 * (PADDING_FACTOR * height)
 
     return (
@@ -109,11 +108,11 @@ class OperatorDiagram extends PureComponent {
         </defs>
 
         {
-          input.map((emissions, i) => (
+          input.map((e, i) => (
             <DraggableView
               {...this.props}
               key={i}
-              emissions={emissions}
+              emissions={e}
               completion={completion}
               onChangeEmissions={input => this.updateEmissions(i, input)}
               onChangeCompletion={this.updateCompletion}
