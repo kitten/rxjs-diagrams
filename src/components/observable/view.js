@@ -52,7 +52,7 @@ const ObservableView = ({
 
       { completion && (
         <Completion
-          isDraggable={typeof onChange === 'function'}
+          isDraggable={typeof onChangeCompletion === 'function'}
           bold={lastCoincidesCompletion}
           x={transformFactor(completion)}
           height={height}
@@ -72,7 +72,7 @@ const ObservableView = ({
           <Emission
             {...props}
             key={i}
-            isDraggable={typeof onChange === 'function'}
+            isDraggable={typeof onChangeEmissions === 'function'}
             isDragging={props.id !== undefined && isDragging === props.id}
             width={width}
             height={height}
