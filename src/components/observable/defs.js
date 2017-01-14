@@ -12,7 +12,7 @@ const Defs = ({ id, x = 1 }) => (
       <stop offset={`${x * 100}%`} stopColor={rightGradientColor}/>
 
       {(x && x < 1) && (
-        <stop offset={`${x * 100 + 0.01}%`} stopColor={rightGradientColor.grayscale()}/>
+        <stop offset={`${x * 100}%`} stopColor={rightGradientColor.grayscale()}/>
       )}
 
       {(x && x < 1) && (
