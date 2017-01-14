@@ -17,6 +17,7 @@ const mousemove$ = fromEvent(window, 'mousemove')
 
 const mouseup$ = fromEvent(window, 'mouseup')
   ::merge(fromEvent(window, 'touchend'))
+  ::merge(fromEvent(window, 'touchcancel'))
   ::share()
 
 const transformEmissions = emissions => (

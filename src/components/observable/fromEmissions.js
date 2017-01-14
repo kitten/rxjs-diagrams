@@ -6,8 +6,6 @@ const selectValue = obj => obj.x
 
 function fromEmissions(arr, range, completion) {
   if (!isEmissionsArr(arr)) {
-    console.log(arr)
-
     throw new Error([
       'Expected each value in `emissions` to be an emission',
       '({ x: [number], d: [string] })'
