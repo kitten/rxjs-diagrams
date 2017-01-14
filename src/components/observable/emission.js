@@ -22,7 +22,6 @@ const Emission = ({
   width,
   height,
   stroke = "url(#bg)",
-  onMouseUp,
   onMouseDown,
   isDraggable,
   isDragging,
@@ -39,9 +38,6 @@ const Emission = ({
       strokeWidth={2}
       onMouseDown={() => {
         onMouseDown && onMouseDown({ ...rest, x, d })
-      }}
-      onMouseUp={() => {
-        onMouseUp && onMouseUp({ ...rest, x, d })
       }}
       filter={isDragging ? 'url(#shadow)' : ''}
     />

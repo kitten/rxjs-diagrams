@@ -8,12 +8,16 @@ import {
 const COMPLETION_HEIGHT = 2.4 * EMISSION_RADIUS
 const BOLD_FACTOR = 1.2
 
+const rectStyle = isDraggable => ({
+  cursor: isDraggable ? 'ew-resize' : 'default'
+})
+
 const Completion = ({
+  isDraggable,
   x,
   height,
   width,
   bold,
-  onMouseUp,
   onMouseDown
 }) => (
   <rect
@@ -23,11 +27,9 @@ const Completion = ({
     x={x * width - 1}
     y={(0.5 - (bold ? BOLD_FACTOR : 1) * COMPLETION_HEIGHT / 2) * height}
     onMouseDown={evt => {
-      onMouseDown && onMouseDown({ x }, evt)
+      onMouseDown && onMouseDown({ x })
     }}
-    onMouseUp={evt => {
-      onMouseUp && onMouseUp({ x }, evt)
-    }}
+    style={rectStyle(isDraggable)}
   />
 )
 

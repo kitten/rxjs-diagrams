@@ -23,8 +23,8 @@ const ObservableView = ({
   y,
   completion = 1,
   emissions = [],
-  onMouseDown,
-  onMouseUp,
+  onMouseDownEmission,
+  onMouseDownCompletion,
   getRef,
   isDragging, // NOTE: id of the emission that is being dragged
   onChange // NOTE: Just for isDraggable
@@ -52,10 +52,18 @@ const ObservableView = ({
 
       { completion && (
         <Completion
+          isDraggable={typeof onChange === 'function'}
           bold={lastCoincidesCompletion}
           x={transformFactor(completion)}
           height={height}
           width={width}
+          onMouseDown={data => {
+            onMouseDownCompletion && onMouseDownCompletion({
+              ...data,
+              leftX,
+              rightX
+            })
+          }}
         />
       )}
 
@@ -70,15 +78,8 @@ const ObservableView = ({
             height={height}
             stroke="url(#stroke)"
             x={transformFactor(x)}
-            onMouseDown={(data) => {
-              onMouseDown && onMouseDown({
-                ...data,
-                leftX,
-                rightX
-              })
-            }}
-            onMouseUp={(data) => {
-              onMouseUp && onMouseUp({
+            onMouseDown={data => {
+              onMouseDownEmission && onMouseDownEmission({
                 ...data,
                 leftX,
                 rightX
@@ -98,8 +99,8 @@ ObservableView.propTypes = {
   y: PropTypes.number,
   completion: PropTypes.number,
   emissions: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onMouseDown: PropTypes.func,
-  onMouseUp: PropTypes.func,
+  onMouseDownEmission: PropTypes.func,
+  onMouseDownCompletion: PropTypes.func,
   getRef: PropTypes.func,
   isDragging: PropTypes.number,
   onChange: PropTypes.func,
