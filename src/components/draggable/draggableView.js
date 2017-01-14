@@ -4,6 +4,7 @@ import { fromEvent } from 'rxjs/observable/fromEvent'
 import { share } from 'rxjs/operator/share'
 import { takeUntil } from 'rxjs/operator/takeUntil'
 import { map } from 'rxjs/operator/map'
+import { throttleTime } from 'rxjs/operator/throttleTime'
 import { _finally } from 'rxjs/operator/finally'
 
 const mousemove$ = fromEvent(window, 'mousemove')::share()
@@ -62,6 +63,7 @@ class DraggableView extends PureComponent {
       ::_finally(() => {
         this.setState({ isDragging: -1 })
       })
+      ::throttleTime(1000 / 60) // NOTE: Throttle to 60 FPS
       ::map(({ clientX }) => {
         const { completion } = this.props
         const { left } = svg.getBoundingClientRect()

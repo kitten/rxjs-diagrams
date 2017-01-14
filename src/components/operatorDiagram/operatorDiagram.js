@@ -34,7 +34,7 @@ class OperatorDiagram extends PureComponent {
     const output$ = transformEmissions(transform, completion, ...input)
 
     output$.subscribe(output => {
-      this.setState({ output })
+      this.setState({ input, output })
     })
   }
 
@@ -45,7 +45,6 @@ class OperatorDiagram extends PureComponent {
         emissions :
         [ emissions ]
 
-    this.setState({ input })
     this.processInput(input)
   }
 
@@ -53,7 +52,6 @@ class OperatorDiagram extends PureComponent {
     const input = this.state.input.slice()
     input[i] = emissions
 
-    this.setState({ input })
     this.processInput(input)
   }
 
