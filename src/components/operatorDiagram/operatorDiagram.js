@@ -43,20 +43,22 @@ class OperatorDiagram extends PureComponent {
 
     const output$ = transformEmissions(transform, completion, ...input)
 
+    this.input = input // Store input for next use
+
     output$.subscribe(output => {
-      this.setState({ input, output, completion })
+      this.setState({ output, completion })
     })
   }
 
   updateEmissions = (i, emissions) => {
-    const input = this.state.input.slice()
+    const input = this.input.slice()
     input[i] = emissions
 
     this.processInput(input, this.state.completion)
   }
 
   updateCompletion = completion => {
-    this.processInput(this.state.input, completion)
+    this.processInput(this.input, completion)
   }
 
   componentWillMount() {
