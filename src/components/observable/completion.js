@@ -30,6 +30,10 @@ const Completion = ({
       evt.preventDefault()
       onMouseDown && onMouseDown({ x })
     }}
+    onTouchStart={evt => {
+      evt.preventDefault()
+      onMouseDown && onMouseDown({ x })
+    }}
     style={rectStyle(isDraggable)}
   />
 )

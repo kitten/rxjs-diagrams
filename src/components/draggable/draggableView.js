@@ -4,11 +4,20 @@ import { fromEvent } from 'rxjs/observable/fromEvent'
 import { share } from 'rxjs/operator/share'
 import { takeUntil } from 'rxjs/operator/takeUntil'
 import { map } from 'rxjs/operator/map'
+import { merge } from 'rxjs/operator/merge'
 import { throttleTime } from 'rxjs/operator/throttleTime'
 import { _finally } from 'rxjs/operator/finally'
 
-const mousemove$ = fromEvent(window, 'mousemove')::share()
-const mouseup$ = fromEvent(window, 'mouseup')::share()
+const mousemove$ = fromEvent(window, 'mousemove')
+  ::merge(
+    fromEvent(window, 'touchmove')
+      ::map(({ touches }) => touches[0])
+  )
+  ::share()
+
+const mouseup$ = fromEvent(window, 'mouseup')
+  ::merge(fromEvent(window, 'touchend'))
+  ::share()
 
 const transformEmissions = emissions => (
   emissions
