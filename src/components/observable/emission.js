@@ -40,7 +40,8 @@ class Emission extends PureComponent {
           fill={white.opacity(.95)}
           stroke={stroke}
           strokeWidth={2}
-          onMouseDown={() => {
+          onMouseDown={evt => {
+            evt.preventDefault()
             onMouseDown && onMouseDown({ ...rest, x, d })
           }}
           filter={isDragging ? 'url(#shadow)' : ''}

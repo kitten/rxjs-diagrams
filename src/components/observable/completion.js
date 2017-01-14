@@ -27,6 +27,7 @@ const Completion = ({
     x={x * width - 1}
     y={(0.5 - (bold ? BOLD_FACTOR : 1) * COMPLETION_HEIGHT / 2) * height}
     onMouseDown={evt => {
+      evt.preventDefault()
       onMouseDown && onMouseDown({ x })
     }}
     style={rectStyle(isDraggable)}
