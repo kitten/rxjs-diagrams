@@ -3,6 +3,8 @@ import { merge } from 'rxjs/observable/merge'
 import { takeUntil } from 'rxjs/operator/takeUntil'
 import { share } from 'rxjs/operator/share'
 
+export const COMPLETION_OFFSET = 0.0001
+
 const makeVirtualEmission = (scheduler, value, delay) => {
   return new Observable(observer => {
     scheduler.schedule(() => {
@@ -18,7 +20,7 @@ const makeVirtualStream = (scheduler, diagram) => {
     makeVirtualEmission(scheduler, d, x)
   ))
 
-  const completion$ = makeVirtualEmission(scheduler, null, completion + .0001)
+  const completion$ = makeVirtualEmission(scheduler, null, completion + COMPLETION_OFFSET)
 
   const emission$ = merge(...partials)
     ::takeUntil(completion$)

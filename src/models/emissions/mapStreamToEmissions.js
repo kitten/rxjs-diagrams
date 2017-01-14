@@ -5,6 +5,7 @@ import { reduce } from 'rxjs/operator/reduce'
 import { map } from 'rxjs/operator/map'
 import { publishReplay } from 'rxjs/operator/publishReplay'
 
+import { COMPLETION_OFFSET } from './makeVirtualStream'
 import makeDiagramModel from './makeDiagramModel'
 
 const mapStreamToEmissions = (scheduler, emission$) => {
@@ -16,7 +17,7 @@ const mapStreamToEmissions = (scheduler, emission$) => {
       return acc
     }, [])
     ::map(emissions => (
-      makeDiagramModel(emissions, scheduler.now())
+      makeDiagramModel(emissions, scheduler.now() - COMPLETION_OFFSET)
     ))
     ::publishReplay(1)
 

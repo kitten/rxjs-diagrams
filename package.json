@@ -16,6 +16,7 @@
   "license": "CC0-1.0",
   "scripts": {
     "storybook": "start-storybook -p 9001 -c .storybook",
+    "build:storybook": "build-storybook -o storybook -c .storybook",
     "clean": "rimraf es lib dist",
     "build:cjs": "BABEL_ENV=commonjs babel src --out-dir lib",
     "build:es": "babel src --out-dir es",
