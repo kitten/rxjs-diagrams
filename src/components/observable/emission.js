@@ -47,8 +47,8 @@ const Emission = ({
     <text
       x={x * width}
       y={height / 2}
-      dy={0.08 * height}
       textAnchor="middle"
+      alignmentBaseline="central"
       stroke={black}
       style={textStyle(height)}
     >

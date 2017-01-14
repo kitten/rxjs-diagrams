@@ -19,6 +19,8 @@ const SEPARATORS = 20
 const ObservableView = ({
   width = 500,
   height = 50,
+  x,
+  y,
   scale = 1,
   completion = 1,
   emissions = [],
@@ -40,6 +42,8 @@ const ObservableView = ({
       viewBox={`0 0 ${width} ${height}`}
       width={width}
       height={height}
+      x={x}
+      y={y}
       ref={ref => getRef && getRef(ref)}
     >
       <Defs x={completion ? transformFactor(completion) : 1}/>
