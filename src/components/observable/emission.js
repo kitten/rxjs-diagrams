@@ -45,7 +45,6 @@ class Emission extends PureComponent {
             onMouseDown && onMouseDown({ ...rest, x, d })
           }}
           onTouchStart={evt => {
-            evt.preventDefault()
             onMouseDown && onMouseDown({ ...rest, x, d })
           }}
           filter={isDragging ? 'url(#shadow)' : ''}
