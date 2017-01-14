@@ -36,7 +36,7 @@ class DraggableView extends PureComponent {
 
   updateX = (id, x) => {
     const { emissions } = this.state
-    const { onChange } = this.props
+    const { onChangeEmissions } = this.props
 
     const newEmissions = emissions.map(emission => (
       emission.id === id ?
@@ -48,8 +48,8 @@ class DraggableView extends PureComponent {
       emissions: newEmissions
     })
 
-    if (onChange) {
-      onChange(newEmissions)
+    if (onChangeEmissions) {
+      onChangeEmissions(newEmissions)
     }
   }
 
@@ -99,12 +99,18 @@ class DraggableView extends PureComponent {
         const newX = relativeX / width * max
 
         return Math.min(
-          Math.max(0, newX),
+          Math.max(0.0001, newX),
           max
         )
       })
       .subscribe(x => {
+        const { onChangeCompletion } = this.props
+
         this.setState({ completion: x })
+
+        if (onChangeCompletion) {
+          onChangeCompletion(x)
+        }
       })
   }
 
@@ -112,6 +118,12 @@ class DraggableView extends PureComponent {
     if (this.props.emissions !== nextProps.emissions) {
       this.setState({
         emissions: transformEmissions(nextProps.emissions)
+      })
+    }
+
+    if (this.props.completion !== nextProps.completion) {
+      this.setState({
+        completion: nextProps.completion
       })
     }
   }

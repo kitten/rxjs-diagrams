@@ -26,26 +26,28 @@ class OperatorDiagram extends PureComponent {
     height: 50
   }
 
-  state = {}
+  state = {
+    completion: this.props.completion
+  }
 
-  processInput = input => {
-    const { transform, completion } = this.props
+  processInput = (input, completion) => {
+    const { transform } = this.props
 
     const output$ = transformEmissions(transform, completion, ...input)
 
     output$.subscribe(output => {
-      this.setState({ input, output })
+      this.setState({ input, output, completion })
     })
   }
 
-  initInput = emissions => {
+  initInput = (emissions, completion) => {
     const hasMultipleInputs = emissions.some(Array.isArray)
 
     const input = hasMultipleInputs ?
         emissions :
         [ emissions ]
 
-    this.processInput(input)
+    this.processInput(input, completion)
   }
 
   updateEmissions = (i, emissions) => {
@@ -55,13 +57,20 @@ class OperatorDiagram extends PureComponent {
     this.processInput(input)
   }
 
+  updateCompletion = completion => {
+    this.processInput(this.state.input, completion)
+  }
+
   componentWillMount() {
-    this.initInput(this.props.emissions)
+    this.initInput(this.props.emissions, this.props.completion)
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.emissions !== nextProps.emissions) {
-      this.initInput(nextProps.emissions)
+    if (
+      this.props.emissions !== nextProps.emissions ||
+      this.props.completion !== nextProps.completion
+    ) {
+      this.initInput(nextProps.emissions, nextProps.completion)
     }
   }
 
@@ -76,7 +85,8 @@ class OperatorDiagram extends PureComponent {
 
     const {
       output,
-      input
+      input,
+      completion
     } = this.state
 
     if (!output) {
@@ -104,7 +114,9 @@ class OperatorDiagram extends PureComponent {
               {...this.props}
               key={i}
               emissions={emissions}
-              onChange={input => this.updateEmissions(i, input)}
+              completion={completion}
+              onChangeEmissions={input => this.updateEmissions(i, input)}
+              onChangeCompletion={this.updateCompletion}
               y={i * height}
             />
           ))

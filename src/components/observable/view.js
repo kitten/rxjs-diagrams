@@ -32,7 +32,7 @@ const ObservableView = ({
   const transformFactor = makeTransformFactor({ width, height })
 
   const last = emissions[emissions.length - 1]
-  const lastCoincidesCompletion = last.x === completion
+  const lastCoincidesCompletion = last && last.x === completion
 
   const leftX = transformFactor(0) * width
   const rightX = transformFactor(1) * width
