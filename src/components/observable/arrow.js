@@ -8,7 +8,7 @@ import {
   ARROW_HEIGHT_FACTOR
 } from './constants'
 
-const Arrow = ({ height, width }) => (
+const Arrow = ({ height, width, id }) => (
   <polygon
     points={points([
       [ 0, 0.5 - HEIGHT_FACTOR ],
@@ -19,7 +19,7 @@ const Arrow = ({ height, width }) => (
       [ 1 - ARROW_WIDTH_FACTOR, 0.5 + HEIGHT_FACTOR ],
       [ 0, 0.5 + HEIGHT_FACTOR ]
     ].map(scaleVector(width, height)))}
-    fill="url(#bg)"
+    fill={`url(#bg-${id})`}
   />
 )
 

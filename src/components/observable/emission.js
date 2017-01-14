@@ -23,7 +23,7 @@ class Emission extends PureComponent {
       d,
       width,
       height,
-      stroke = "url(#bg)",
+      stroke,
       onMouseDown,
       isDraggable,
       isDragging,

@@ -114,6 +114,7 @@ class OperatorDiagram extends PureComponent {
             <DraggableView
               {...this.props}
               key={i}
+              id={`input-${i}`}
               emissions={e}
               completion={completion}
               onChangeEmissions={input => this.updateEmissions(i, input)}
@@ -134,6 +135,7 @@ class OperatorDiagram extends PureComponent {
 
         <TransitionView
           {...this.props}
+          id='result'
           y={height * (input.length + 1) + 2 * PADDING_FACTOR * height}
           emissions={output.emissions}
           completion={output.completion}

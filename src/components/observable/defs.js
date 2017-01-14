@@ -5,9 +5,9 @@ import {
   rightGradientColor
 } from './constants'
 
-const Defs = ({ x = 1 }) => (
+const Defs = ({ id, x = 1 }) => (
   <defs>
-    <linearGradient id="bg">
+    <linearGradient id={`bg-${id}`}>
       <stop offset="0%" stopColor={leftGradientColor}/>
       <stop offset={`${x * 100}%`} stopColor={rightGradientColor}/>
 

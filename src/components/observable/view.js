@@ -21,6 +21,7 @@ const ObservableView = ({
   height = 50,
   x,
   y,
+  id,
   completion = 1,
   emissions = [],
   onMouseDownEmission,
@@ -46,8 +47,8 @@ const ObservableView = ({
       y={y}
       ref={ref => getRef && getRef(ref)}
     >
-      <Defs x={completion ? transformFactor(completion) : 1}/>
-      <Arrow height={height} width={width}/>
+      <Defs x={completion ? transformFactor(completion) : 1} id={id}/>
+      <Arrow height={height} width={width} id={id}/>
       <Separators height={height} width={width} transformFactor={transformFactor}/>
 
       { completion && (
