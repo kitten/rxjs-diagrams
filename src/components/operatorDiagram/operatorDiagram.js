@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import { transformEmissions } from '../../models/emissions/index'
 import DraggableView from '../draggable/index'
 import TransitionView from '../transition/index'
@@ -12,6 +12,15 @@ import {
 const PADDING_FACTOR = 0.2
 
 class OperatorDiagram extends PureComponent {
+  static propTypes = {
+    label: PropTypes.string,
+    transform: PropTypes.func.isRequired,
+    emissions: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object)),
+      PropTypes.arrayOf(PropTypes.object)
+    ]).isRequired
+  }
+
   static defaultProps = {
     width: 500,
     height: 50

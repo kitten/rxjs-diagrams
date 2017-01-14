@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import { white, blue, black, gray } from '../../constants/colors'
 
@@ -21,7 +21,6 @@ const ObservableView = ({
   height = 50,
   x,
   y,
-  scale = 1,
   completion = 1,
   emissions = [],
   onMouseDown,
@@ -30,7 +29,7 @@ const ObservableView = ({
   isDragging, // NOTE: id of the emission that is being dragged
   onChange // NOTE: Just for isDraggable
 }) => {
-  const transformFactor = makeTransformFactor({ width, height, scale })
+  const transformFactor = makeTransformFactor({ width, height })
 
   const last = emissions[emissions.length - 1]
   const lastCoincidesCompletion = last.x === completion
@@ -90,6 +89,20 @@ const ObservableView = ({
       }
     </svg>
   )
+}
+
+ObservableView.propTypes = {
+  width: PropTypes.number,
+  height: PropTypes.number,
+  x: PropTypes.number,
+  y: PropTypes.number,
+  completion: PropTypes.number,
+  emissions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onMouseDown: PropTypes.func,
+  onMouseUp: PropTypes.func,
+  getRef: PropTypes.func,
+  isDragging: PropTypes.number,
+  onChange: PropTypes.func,
 }
 
 export default ObservableView
