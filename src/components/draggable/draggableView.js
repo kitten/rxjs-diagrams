@@ -4,12 +4,15 @@ import { fromEvent } from 'rxjs/observable/fromEvent'
 import { share } from 'rxjs/operator/share'
 import { takeUntil } from 'rxjs/operator/takeUntil'
 import { map } from 'rxjs/operator/map'
+import { _finally } from 'rxjs/operator/finally'
 
 const mousemove$ = fromEvent(window, 'mousemove')::share()
 const mouseup$ = fromEvent(window, 'mouseup')::share()
 
 class DraggableView extends PureComponent {
-  state = {}
+  state = {
+    isDragging: -1
+  }
 
   storeRef = ref => {
     this.svg = ref
@@ -52,8 +55,13 @@ class DraggableView extends PureComponent {
     const { svg } = this
     const { emissions } = this.state
 
+    this.setState({ isDragging: id })
+
     mousemove$
       ::takeUntil(mouseup$)
+      ::_finally(() => {
+        this.setState({ isDragging: -1 })
+      })
       ::map(({ clientX }) => {
         const { completion } = this.props
         const { left } = svg.getBoundingClientRect()
@@ -85,7 +93,7 @@ class DraggableView extends PureComponent {
   }
 
   render() {
-    const { emissions } = this.state
+    const { emissions, isDragging } = this.state
 
     return (
       <TransitionView
@@ -93,6 +101,7 @@ class DraggableView extends PureComponent {
         getRef={this.storeRef}
         onMouseDown={this.onMouseDown}
         emissions={emissions}
+        isDragging={isDragging}
       />
     )
   }

@@ -25,6 +25,7 @@ const Emission = ({
   onMouseUp,
   onMouseDown,
   isDraggable,
+  isDragging,
   ...rest
 }) => (
   <g>
@@ -42,6 +43,7 @@ const Emission = ({
       onMouseUp={() => {
         onMouseUp && onMouseUp({ ...rest, x, d })
       }}
+      filter={isDragging ? 'url(#shadow)' : ''}
     />
 
     <text

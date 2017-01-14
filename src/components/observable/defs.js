@@ -24,6 +24,17 @@ const Defs = ({ x = 1 }) => (
       <stop offset="0%" stopColor={leftGradientColor}/>
       <stop offset="100%" stopColor={rightGradientColor}/>
     </linearGradient>
+
+    <filter
+      id="shadow"
+      x="-50%"
+      y="-50%"
+      width="200%"
+      height="200%"
+    >
+      <feGaussianBlur result="blurOut" in="offOut" stdDeviation="2" />
+      <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+    </filter>
   </defs>
 )
 

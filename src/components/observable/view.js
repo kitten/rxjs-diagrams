@@ -27,6 +27,7 @@ const ObservableView = ({
   onMouseDown,
   onMouseUp,
   getRef,
+  isDragging, // NOTE: id of the emission that is being dragged
   onChange // NOTE: Just for isDraggable
 }) => {
   const transformFactor = makeTransformFactor({ width, height, scale })
@@ -60,16 +61,16 @@ const ObservableView = ({
       )}
 
       {
-        emissions.map(({ x, d, ...rest }, i) => (
+        emissions.map(({ x, ...props }, i) => (
           <Emission
-            {...rest}
+            {...props}
             isDraggable={typeof onChange === 'function'}
-            key={i}
+            isDragging={props.id !== undefined && isDragging === props.id}
+            key={props.id || i}
             width={width}
             height={height}
             stroke="url(#stroke)"
             x={transformFactor(x)}
-            d={d}
             onMouseDown={(data) => {
               onMouseDown && onMouseDown({
                 ...data,
