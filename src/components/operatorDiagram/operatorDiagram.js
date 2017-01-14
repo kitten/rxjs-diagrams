@@ -22,33 +22,61 @@ class OperatorDiagram extends PureComponent {
   processInput = input => {
     const { transform, completion } = this.props
 
-    const output$ = transformEmissions(transform, completion, input)
+    const output$ = transformEmissions(transform, completion, ...input)
 
     output$.subscribe(output => {
       this.setState({ output })
     })
   }
 
-  componentDidMount() {
-    this.processInput(this.props.emissions)
+  initInput = emissions => {
+    const hasMultipleInputs = emissions.some(Array.isArray)
+
+    const input = hasMultipleInputs ?
+        emissions :
+        [ emissions ]
+
+    this.setState({ input })
+    this.processInput(input)
+  }
+
+  updateEmissions = (i, emissions) => {
+    const input = this.state.input.slice()
+    input[i] = emissions
+
+    this.setState({ input })
+    this.processInput(input)
+  }
+
+  componentWillMount() {
+    this.initInput(this.props.emissions)
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.emissions !== nextProps.emissions) {
-      this.processInput(nextProps.emissions)
+      this.initInput(nextProps.emissions)
     }
   }
 
   render() {
-    const { end, width, height, transform, label } = this.props
-    const { output } = this.state
+    const {
+      end,
+      width,
+      height,
+      transform,
+      label
+    } = this.props
+
+    const {
+      output,
+      input
+    } = this.state
 
     if (!output) {
       return null
     }
 
-    const { emissions, completion } = output
-    const totalHeight = height * 3 + 2 * (PADDING_FACTOR * height)
+    const totalHeight = height * (2 + input.length) + 2 * (PADDING_FACTOR * height)
 
     return (
       <svg
@@ -63,25 +91,32 @@ class OperatorDiagram extends PureComponent {
           </linearGradient>
         </defs>
 
-        <DraggableView
-          {...this.props}
-          onChange={this.processInput}
-        />
+        {
+          input.map((emissions, i) => (
+            <DraggableView
+              {...this.props}
+              key={i}
+              emissions={emissions}
+              onChange={input => this.updateEmissions(i, input)}
+              y={i * height}
+            />
+          ))
+        }
 
         <TransformNote
           width={width - 2 * PADDING_FACTOR * width}
           height={height}
           x={PADDING_FACTOR * width}
-          y={height + PADDING_FACTOR * height}
+          y={height * input.length + PADDING_FACTOR * height}
         >
           {label || transfom.toString()}
         </TransformNote>
 
         <TransitionView
           {...this.props}
-          y={2 * (height + PADDING_FACTOR * height)}
-          emissions={emissions}
-          completion={completion}
+          y={height * (input.length + 1) + 2 * PADDING_FACTOR * height}
+          emissions={output.emissions}
+          completion={output.completion}
         />
       </svg>
     )
