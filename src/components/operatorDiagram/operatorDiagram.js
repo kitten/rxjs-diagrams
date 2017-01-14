@@ -54,7 +54,7 @@ class OperatorDiagram extends PureComponent {
     const input = this.state.input.slice()
     input[i] = emissions
 
-    this.processInput(input)
+    this.processInput(input, this.state.completion)
   }
 
   updateCompletion = completion => {
