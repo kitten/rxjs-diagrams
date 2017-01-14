@@ -63,9 +63,9 @@ const ObservableView = ({
         emissions.map(({ x, ...props }, i) => (
           <Emission
             {...props}
+            key={i}
             isDraggable={typeof onChange === 'function'}
             isDragging={props.id !== undefined && isDragging === props.id}
-            key={props.id || i}
             width={width}
             height={height}
             stroke="url(#stroke)"
