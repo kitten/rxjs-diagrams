@@ -1,5 +1,5 @@
 import React from 'react'
-import { white, black } from '../../constants/colors'
+import { white, black, gray } from '../../constants/colors'
 import { fontFamily, fontSize } from '../../constants/font'
 
 const textStyle = height => ({
@@ -19,9 +19,11 @@ const TransformNote = ({
     <rect
       x={x}
       y={y}
-      width={width}
+      width={width - 2}
       height={height}
-      fill={white}
+      fill={white.opacity(.95)}
+      stroke="url(#stroke)"
+      strokeWidth={2}
     />
 
     <text

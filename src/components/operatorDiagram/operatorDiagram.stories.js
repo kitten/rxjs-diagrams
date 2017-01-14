@@ -2,10 +2,12 @@ import React from 'react'
 import { storiesOf } from '@kadira/storybook'
 import { distinctUntilChanged } from 'rxjs/operator/distinctUntilChanged'
 import { delay } from 'rxjs/operator/delay'
+import { withKnobs, number } from '@kadira/storybook-addon-knobs';
 
 import OperatorDiagram from './operatorDiagram'
 
 storiesOf('OperatorDiagram', module)
+  .addDecorator(withKnobs)
   .add('.distinctUntilChanged()', () => {
     const end = 100
     const completion = 80
@@ -19,6 +21,8 @@ storiesOf('OperatorDiagram', module)
 
     return (
       <OperatorDiagram
+        width={number('Width', 500)}
+        height={number('Height', 50)}
         emissions={emissions}
         transform={obs => obs::distinctUntilChanged()}
         end={end}

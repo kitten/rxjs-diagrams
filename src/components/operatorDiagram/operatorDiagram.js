@@ -4,6 +4,13 @@ import DraggableView from '../draggable/index'
 import TransitionView from '../transition/index'
 import TransformNote from './transformNote'
 
+import {
+  leftGradientColor,
+  rightGradientColor
+} from '../observable/constants'
+
+const PADDING_FACTOR = 0.2
+
 class OperatorDiagram extends PureComponent {
   static defaultProps = {
     width: 500,
@@ -41,29 +48,38 @@ class OperatorDiagram extends PureComponent {
     }
 
     const { emissions, completion } = output
+    const totalHeight = height * 3 + 2 * (PADDING_FACTOR * height)
 
     return (
       <svg
-        viewBox={`0 0 ${width} ${height * 3}`}
+        viewBox={`0 0 ${width} ${totalHeight}`}
         width={width}
-        height={height * 3}
+        height={totalHeight}
       >
+        <defs>
+          <linearGradient id="stroke">
+            <stop offset="0%" stopColor={leftGradientColor}/>
+            <stop offset="100%" stopColor={rightGradientColor}/>
+          </linearGradient>
+        </defs>
+
         <DraggableView
           {...this.props}
           onChange={this.processInput}
         />
 
         <TransformNote
-          width={width}
+          width={width - 2 * PADDING_FACTOR * width}
           height={height}
-          y={height}
+          x={PADDING_FACTOR * width}
+          y={height + PADDING_FACTOR * height}
         >
           {label || transfom.toString()}
         </TransformNote>
 
         <TransitionView
           {...this.props}
-          y={2 * height}
+          y={2 * (height + PADDING_FACTOR * height)}
           emissions={emissions}
           completion={completion}
         />
