@@ -1,5 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react'
-import { transformEmissions } from '../../models/emissions/index'
+import { transformEmissions, makeDiagramModel } from '../../models/emissions/index'
 import DraggableView from '../draggable/index'
 import TransitionView from '../transition/index'
 import TransformNote from './transformNote'
@@ -23,13 +23,18 @@ class OperatorDiagram extends PureComponent {
   static propTypes = {
     label: PropTypes.string,
     transform: PropTypes.func.isRequired,
+    skip: PropTypes.number,
     emissions: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.object)),
       PropTypes.arrayOf(PropTypes.object)
-    ]).isRequired
+    ]).isRequired,
+    onChange: PropTypes.func,
+    x: PropTypes.number,
+    y: PropTypes.number
   }
 
   static defaultProps = {
+    skip: 0,
     width: 500,
     height: 50
   }
@@ -39,7 +44,7 @@ class OperatorDiagram extends PureComponent {
   }
 
   processInput = (input, completion) => {
-    const { transform } = this.props
+    const { transform, onChange } = this.props
 
     const output$ = transformEmissions(transform, completion, ...input)
 
@@ -47,6 +52,10 @@ class OperatorDiagram extends PureComponent {
 
     output$.subscribe(output => {
       this.setState({ output, completion })
+
+      if (onChange) {
+        onChange(output)
+      }
     })
   }
 
@@ -81,7 +90,10 @@ class OperatorDiagram extends PureComponent {
       height,
       transform,
       label,
-      emissions
+      emissions,
+      skip,
+      x,
+      y
     } = this.props
 
     const {
@@ -94,13 +106,15 @@ class OperatorDiagram extends PureComponent {
     }
 
     const input = getInput(emissions)
-    const totalHeight = height * (2 + input.length) + 2 * (PADDING_FACTOR * height)
+    const totalHeight = height * (2 + input.length - skip) + 2 * (PADDING_FACTOR * height)
 
     return (
       <svg
         viewBox={`0 0 ${width} ${totalHeight}`}
         width={width}
         height={totalHeight}
+        x={x}
+        y={y}
       >
         <defs>
           <linearGradient id="stroke">
@@ -110,7 +124,7 @@ class OperatorDiagram extends PureComponent {
         </defs>
 
         {
-          input.map((e, i) => (
+          input.slice(skip).map((e, i) => (
             <DraggableView
               {...this.props}
               key={i}
@@ -128,7 +142,7 @@ class OperatorDiagram extends PureComponent {
           width={width - 2 * PADDING_FACTOR * width}
           height={height}
           x={PADDING_FACTOR * width}
-          y={height * input.length + PADDING_FACTOR * height}
+          y={height * (input.length - skip) + PADDING_FACTOR * height}
         >
           {label || transfom.toString()}
         </TransformNote>
@@ -136,7 +150,7 @@ class OperatorDiagram extends PureComponent {
         <TransitionView
           {...this.props}
           id='result'
-          y={height * (input.length + 1) + 2 * PADDING_FACTOR * height}
+          y={height * (input.length + 1 - skip) + 2 * PADDING_FACTOR * height}
           emissions={output.emissions}
           completion={output.completion}
         />
