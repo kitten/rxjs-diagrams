@@ -76,7 +76,7 @@ class DraggableView extends PureComponent {
     const newX = relativeX / range * max
 
     return Math.min(
-      Math.max(0, newX),
+      Math.max(isCompletion ? 0.0001 : 0, newX),
       isCompletion ? max : completion
     )
   }
