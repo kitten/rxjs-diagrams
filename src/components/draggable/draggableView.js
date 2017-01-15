@@ -102,7 +102,7 @@ class DraggableView extends PureComponent {
     mousemove$
       ::takeUntil(mouseup$)
       ::throttleTime(1000 / 60) // NOTE: Throttle to 60 FPS
-      ::map(this.transformMove)
+      ::map(this.transformMove.bind(this, leftX, rightX))
       .subscribe(x => {
         const { onChangeCompletion } = this.props
 
