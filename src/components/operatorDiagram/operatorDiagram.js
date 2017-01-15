@@ -31,7 +31,8 @@ class OperatorDiagram extends PureComponent {
     onChange: PropTypes.func,
     x: PropTypes.number,
     y: PropTypes.number,
-    fit: PropTypes.bool
+    fit: PropTypes.bool,
+    style: PropTypes.style
   }
 
   static defaultProps = {
@@ -96,7 +97,8 @@ class OperatorDiagram extends PureComponent {
       skip,
       x,
       y,
-      fit
+      fit,
+      style
     } = this.props
 
     const {
@@ -118,6 +120,7 @@ class OperatorDiagram extends PureComponent {
         height={fit ? undefined : totalHeight}
         x={x}
         y={y}
+        style={style}
       >
         <defs>
           <linearGradient id="stroke">
