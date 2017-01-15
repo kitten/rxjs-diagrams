@@ -1,6 +1,6 @@
 {
   "name": "rxjs-diagrams",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "React components for visualising RxJS observables and operators",
   "main": "lib/index.js",
   "jsnext:main": "es/index.js",
