@@ -63,7 +63,7 @@ class DraggableView extends PureComponent {
     }
   }
 
-  transformMove = (leftX, rightX, { clientX }) => {
+  transformMove = (isCompletion, leftX, rightX, { clientX }) => {
     const { svg } = this
     const { completion } = this.props
     const { left, width } = svg.getBoundingClientRect()
@@ -77,7 +77,7 @@ class DraggableView extends PureComponent {
 
     return Math.min(
       Math.max(0, newX),
-      completion
+      isCompletion ? max : completion
     )
   }
 
@@ -92,7 +92,7 @@ class DraggableView extends PureComponent {
         this.setState({ isDragging: -1 })
       })
       ::throttleTime(1000 / 60) // NOTE: Throttle to 60 FPS
-      ::map(this.transformMove.bind(this, leftX, rightX))
+      ::map(this.transformMove.bind(this, false, leftX, rightX))
       .subscribe(x => this.updateX(id, x))
   }
 
@@ -102,7 +102,7 @@ class DraggableView extends PureComponent {
     mousemove$
       ::takeUntil(mouseup$)
       ::throttleTime(1000 / 60) // NOTE: Throttle to 60 FPS
-      ::map(this.transformMove.bind(this, leftX, rightX))
+      ::map(this.transformMove.bind(this, true, leftX, rightX))
       .subscribe(x => {
         const { onChangeCompletion } = this.props
 
