@@ -3,7 +3,7 @@ import { merge } from 'rxjs/observable/merge'
 import { takeUntil } from 'rxjs/operator/takeUntil'
 import { share } from 'rxjs/operator/share'
 
-export const COMPLETION_OFFSET = 0.0001
+export const COMPLETION_OFFSET = 0.00001
 
 const makeVirtualEmission = (scheduler, value, delay) => {
   return new Observable(observer => {

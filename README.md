@@ -80,6 +80,7 @@ Exports:
 - EmissionsView (Docs TODO)
 - TransitionEmissionsView (Docs TODO)
 - DraggableEmissionsView (Docs TODO)
+- ChainDiagram (Docs TODO)
 - OperatorDiagram (also the default export)
 
 ### Emissions, End & Completion

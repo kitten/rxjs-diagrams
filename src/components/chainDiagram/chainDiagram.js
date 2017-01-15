@@ -1,7 +1,19 @@
-import React, { PureComponent, cloneElement, Children } from 'react'
+import React, { PureComponent, PropTypes, cloneElement, Children } from 'react'
 import OperatorDiagram from '../operatorDiagram/index'
 
 class ChainDiagram extends PureComponent {
+  static propTypes = {
+    width: PropTypes.number,
+    height: PropTypes.number,
+    completion: PropTypes.number,
+    end: PropTypes.number.isRequired
+  }
+
+  static defaultProps = {
+    width: 500,
+    height: 50
+  }
+
   state = {
     inputs: []
   }
