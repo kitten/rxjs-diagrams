@@ -39,7 +39,7 @@ class DraggableView extends PureComponent {
     this.svg = ref
   }
 
-    getMax = () => {
+  getMax = () => {
     const { end, completion } = this.props
     return typeof end === 'number' ? end : completion
   }
@@ -72,8 +72,8 @@ class DraggableView extends PureComponent {
     const max = this.getMax()
     const range = rightX - leftX
 
-    const relativeX = Math.max(0, clientX - left - scale * leftX)
-    const newX = relativeX / range * max * scale
+    const relativeX = Math.max(0, scale * (clientX - left) - leftX)
+    const newX = relativeX / range * max
 
     return Math.min(
       Math.max(0, newX),
