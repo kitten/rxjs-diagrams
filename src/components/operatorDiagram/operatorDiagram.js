@@ -30,13 +30,15 @@ class OperatorDiagram extends PureComponent {
     ]).isRequired,
     onChange: PropTypes.func,
     x: PropTypes.number,
-    y: PropTypes.number
+    y: PropTypes.number,
+    fit: PropTypes.boolean,
   }
 
   static defaultProps = {
     skip: 0,
     width: 500,
-    height: 50
+    height: 50,
+    fit: false
   }
 
   state = {
@@ -93,7 +95,8 @@ class OperatorDiagram extends PureComponent {
       emissions,
       skip,
       x,
-      y
+      y,
+      fit
     } = this.props
 
     const {
@@ -111,8 +114,8 @@ class OperatorDiagram extends PureComponent {
     return (
       <svg
         viewBox={`0 0 ${width} ${totalHeight}`}
-        width={width}
-        height={totalHeight}
+        width={fit ? undefined : width}
+        height={fit ? undefined : totalHeight}
         x={x}
         y={y}
       >

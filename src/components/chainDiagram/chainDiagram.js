@@ -6,12 +6,14 @@ class ChainDiagram extends PureComponent {
     width: PropTypes.number,
     height: PropTypes.number,
     completion: PropTypes.number,
-    end: PropTypes.number.isRequired
+    end: PropTypes.number.isRequired,
+    fit: PropTypes.boolean
   }
 
   static defaultProps = {
     width: 500,
-    height: 50
+    height: 50,
+    fit: false
   }
 
   state = {
@@ -44,7 +46,8 @@ class ChainDiagram extends PureComponent {
       width,
       children,
       completion,
-      end
+      end,
+      fit
     } = this.props
 
     const { inputs } = this.state
@@ -102,8 +105,8 @@ class ChainDiagram extends PureComponent {
     return (
       <svg
         viewBox={`0 0 ${width} ${y}`}
-        width={width}
-        height={y}
+        width={fit ? undefined : width}
+        height={fit ? undefined : y}
       >
         {newChildren}
       </svg>

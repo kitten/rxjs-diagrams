@@ -63,8 +63,25 @@ class DraggableView extends PureComponent {
     }
   }
 
-  onMouseDownEmission = ({ id, leftX, rightX }) => {
+  transformMove = (leftX, rightX, { clientX }) => {
     const { svg } = this
+    const { completion } = this.props
+    const { left, width } = svg.getBoundingClientRect()
+
+    const scale = this.props.width / width
+    const max = this.getMax()
+    const range = rightX - leftX
+
+    const relativeX = Math.max(0, clientX - left - scale * leftX)
+    const newX = relativeX / range * max * scale
+
+    return Math.min(
+      Math.max(0, newX),
+      completion
+    )
+  }
+
+  onMouseDownEmission = ({ id, leftX, rightX }) => {
     const { emissions } = this.state
 
     this.setState({ isDragging: id })
@@ -75,21 +92,7 @@ class DraggableView extends PureComponent {
         this.setState({ isDragging: -1 })
       })
       ::throttleTime(1000 / 60) // NOTE: Throttle to 60 FPS
-      ::map(({ clientX }) => {
-        const { completion } = this.props
-        const { left } = svg.getBoundingClientRect()
-
-        const max = this.getMax()
-        const width = rightX - leftX
-
-        const relativeX = Math.max(0, clientX - left - leftX)
-        const newX = relativeX / width * max
-
-        return Math.min(
-          Math.max(0, newX),
-          completion
-        )
-      })
+      ::map(this.transformMove.bind(this, leftX, rightX))
       .subscribe(x => this.updateX(id, x))
   }
 
@@ -99,20 +102,7 @@ class DraggableView extends PureComponent {
     mousemove$
       ::takeUntil(mouseup$)
       ::throttleTime(1000 / 60) // NOTE: Throttle to 60 FPS
-      ::map(({ clientX }) => {
-        const { left } = svg.getBoundingClientRect()
-
-        const max = this.getMax()
-        const width = rightX - leftX
-
-        const relativeX = Math.max(0, clientX - left - leftX)
-        const newX = relativeX / width * max
-
-        return Math.min(
-          Math.max(0.0001, newX),
-          max
-        )
-      })
+      ::map(this.transformMove)
       .subscribe(x => {
         const { onChangeCompletion } = this.props
 

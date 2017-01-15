@@ -37,6 +37,7 @@ storiesOf('OperatorDiagram', module)
     <OperatorDiagram
       width={number('Width', 500)}
       height={number('Height', 50)}
+      fit={true}
       emissions={emissions}
       transform={obs => obs::distinctUntilChanged()}
       end={end}
