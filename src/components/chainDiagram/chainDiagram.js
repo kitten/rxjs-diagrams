@@ -7,7 +7,7 @@ class ChainDiagram extends PureComponent {
     height: PropTypes.number,
     completion: PropTypes.number,
     end: PropTypes.number.isRequired,
-    fit: PropTypes.boolean
+    fit: PropTypes.bool
   }
 
   static defaultProps = {

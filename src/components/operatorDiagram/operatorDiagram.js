@@ -31,7 +31,7 @@ class OperatorDiagram extends PureComponent {
     onChange: PropTypes.func,
     x: PropTypes.number,
     y: PropTypes.number,
-    fit: PropTypes.boolean,
+    fit: PropTypes.bool
   }
 
   static defaultProps = {
