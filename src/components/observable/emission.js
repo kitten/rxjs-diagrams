@@ -12,6 +12,7 @@ const textStyle = height => ({
   fontFamily,
   fontSize: `${height * 0.24}px`,
   lineHeight: `${height * 0.24}px`,
+  textShadow: 'none',
   userSelect: 'none',
   pointerEvents: 'none'
 })
@@ -56,6 +57,7 @@ class Emission extends PureComponent {
           textAnchor="middle"
           alignmentBaseline="central"
           stroke={black}
+          fill={black}
           style={textStyle(height)}
         >
           {d}
