@@ -28,7 +28,9 @@ const ObservableView = ({
   onMouseDownCompletion,
   getRef,
   isDragging, // NOTE: id of the emission that is being dragged
-  onChange // NOTE: Just for isDraggable
+  onChange, // NOTE: Just for isDraggable
+  style,
+  className
 }) => {
   const transformFactor = makeTransformFactor({ width, height })
 
@@ -46,6 +48,8 @@ const ObservableView = ({
       x={x}
       y={y}
       ref={ref => getRef && getRef(ref)}
+      style={style}
+      className={className}
     >
       <Defs x={completion ? transformFactor(completion) : 1} id={id}/>
       <Arrow height={height} width={width} id={id}/>
@@ -105,6 +109,8 @@ ObservableView.propTypes = {
   getRef: PropTypes.func,
   isDragging: PropTypes.number,
   onChange: PropTypes.func,
+  style: PropTypes.object,
+  className: PropTypes.string
 }
 
 export default ObservableView
