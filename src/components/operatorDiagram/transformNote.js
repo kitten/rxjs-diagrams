@@ -5,7 +5,8 @@ import { fontFamily, fontSize } from '../../constants/font'
 const textStyle = height => ({
   fontFamily,
   fontSize: `${height * 0.24}px`,
-  lineHeight: `${height * 0.24}px`
+  lineHeight: `${height * 0.24}px`,
+  textShadow: 'none'
 })
 
 const TransformNote = ({
@@ -32,6 +33,7 @@ const TransformNote = ({
       textAnchor="middle"
       alignmentBaseline="central"
       stroke={black}
+      fill={black}
       style={textStyle(height)}
     >
       {children}
