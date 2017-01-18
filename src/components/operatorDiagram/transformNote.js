@@ -23,7 +23,7 @@ const TransformNote = ({
       width={width - 2}
       height={height}
       fill={white.opacity(.95)}
-      stroke="url(#stroke)"
+      stroke="url(#diagram-stroke)"
       strokeWidth={2}
     />
 

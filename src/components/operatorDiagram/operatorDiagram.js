@@ -123,7 +123,7 @@ class OperatorDiagram extends PureComponent {
         style={style}
       >
         <defs>
-          <linearGradient id="stroke">
+          <linearGradient id="diagram-stroke">
             <stop offset="0%" stopColor={leftGradientColor}/>
             <stop offset="100%" stopColor={rightGradientColor}/>
           </linearGradient>
