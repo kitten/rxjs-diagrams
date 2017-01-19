@@ -10,6 +10,7 @@ const textStyle = height => ({
 })
 
 const TransformNote = ({
+  stroke,
   children,
   width = 500,
   height = 50,
@@ -22,8 +23,8 @@ const TransformNote = ({
       y={y}
       width={width - 2}
       height={height}
-      fill={white.opacity(.95)}
-      stroke="url(#diagram-stroke)"
+      fill={white.opacity(.95).toString()}
+      stroke={stroke}
       strokeWidth={2}
     />
 

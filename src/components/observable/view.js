@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import { generate } from 'shortid';
 
 import { white, blue, black, gray } from '../../constants/colors'
 
@@ -32,6 +33,10 @@ const ObservableView = ({
   style,
   className
 }) => {
+  if (!id) {
+    id = generate()
+  }
+
   const transformFactor = makeTransformFactor({ width, height })
 
   const last = emissions[emissions.length - 1]
