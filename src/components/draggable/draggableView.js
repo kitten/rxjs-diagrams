@@ -24,7 +24,7 @@ const transformEmissions = emissions => (
   emissions
     .map((data, i) => ({
       ...data,
-      id: i
+      index: i
     }))
 )
 
@@ -44,12 +44,12 @@ class DraggableView extends PureComponent {
     return typeof end === 'number' ? end : completion
   }
 
-  updateX = (id, x) => {
+  updateX = (index, x) => {
     const { emissions } = this.state
     const { onChangeEmissions } = this.props
 
     const newEmissions = emissions.map(emission => (
-      emission.id === id ?
+      emission.index === index ?
         { ...emission, x } :
         emission
     ))
@@ -81,10 +81,10 @@ class DraggableView extends PureComponent {
     )
   }
 
-  onMouseDownEmission = ({ id, leftX, rightX }) => {
+  onMouseDownEmission = ({ index, leftX, rightX }) => {
     const { emissions } = this.state
 
-    this.setState({ isDragging: id })
+    this.setState({ isDragging: index })
 
     mousemove$
       ::takeUntil(mouseup$)
@@ -93,7 +93,7 @@ class DraggableView extends PureComponent {
       })
       ::throttleTime(1000 / 60) // NOTE: Throttle to 60 FPS
       ::map(this.transformMove.bind(this, false, leftX, rightX))
-      .subscribe(x => this.updateX(id, x))
+      .subscribe(x => this.updateX(index, x))
   }
 
   onMouseDownCompletion = ({ leftX, rightX }) => {
