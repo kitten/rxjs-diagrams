@@ -28,6 +28,7 @@ class Emission extends PureComponent {
       onMouseDown,
       isDraggable,
       isDragging,
+      id,
       ...rest
     } = this.props
 
@@ -39,7 +40,7 @@ class Emission extends PureComponent {
           cy={height / 2}
           r={EMISSION_RADIUS * height}
           fill={white.opacity(.95)}
-          stroke={stroke}
+          stroke={`url(#stroke-${id})`}
           strokeWidth={2}
           onMouseDown={evt => {
             evt.preventDefault()
@@ -48,7 +49,7 @@ class Emission extends PureComponent {
           onTouchStart={evt => {
             onMouseDown && onMouseDown({ ...rest, x, d })
           }}
-          filter={isDragging ? 'url(#shadow)' : ''}
+          filter={isDragging ? `url(#shadow-${id})` : ''}
         />
 
         <text
@@ -64,7 +65,7 @@ class Emission extends PureComponent {
         </text>
       </g>
     )
-}
+  }
 }
 
 export default Emission

@@ -82,11 +82,11 @@ const ObservableView = ({
           <Emission
             {...props}
             key={i}
+            id={id}
             isDraggable={typeof onMouseDownEmission === 'function'}
             isDragging={props.id !== undefined && isDragging === props.id}
             width={width}
             height={height}
-            stroke="url(#stroke)"
             x={transformFactor(x)}
             onMouseDown={data => {
               onMouseDownEmission && onMouseDownEmission({

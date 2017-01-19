@@ -20,13 +20,13 @@ const Defs = ({ id, x = 1 }) => (
       )}
     </linearGradient>
 
-    <linearGradient id="stroke">
+    <linearGradient id={`stroke-${id}`}>
       <stop offset="0%" stopColor={leftGradientColor}/>
       <stop offset="100%" stopColor={rightGradientColor}/>
     </linearGradient>
 
     <filter
-      id="shadow"
+      id={`shadow-${id}`}
       x="-50%"
       y="-50%"
       width="200%"
