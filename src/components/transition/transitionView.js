@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component, PropTypes } from 'react'
 import { EmissionsView } from '../observable'
 import { Motion, spring, presets } from 'react-motion'
 
@@ -7,26 +7,34 @@ const parameters = {
   damping: 10
 }
 
-const TransitionObservableView = props => typeof window === 'undefined' ? (
-  <EmissionsView {...props} />
-) : (
-  <Motion
-    defaultStyle={{
-      end: 1
-    }}
-    style={{
-      end: spring(props.end, parameters)
-    }}
-  >
-    {
-      ({ end }) => (
-        <EmissionsView
-          {...props}
-          end={end}
-        />
-      )
-    }
-  </Motion>
-)
+class TransitionObservableView extends Component {
+  static propTypes = {
+    noTransition: PropTypes.bool
+  }
+
+  render() {
+    const { noTransition, end } = this.props
+
+    return (
+      <Motion
+        defaultStyle={{
+          end: noTransition ? end : 1
+        }}
+        style={{
+          end: spring(end, parameters)
+        }}
+      >
+        {
+          ({ end }) => (
+            <EmissionsView
+              {...this.props}
+              end={end}
+            />
+          )
+        }
+      </Motion>
+    )
+  }
+}
 
 export default TransitionObservableView
