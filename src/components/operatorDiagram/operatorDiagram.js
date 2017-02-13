@@ -1,5 +1,4 @@
 import React, { PureComponent, PropTypes } from 'react'
-import { generate } from 'shortid'
 import { transformEmissions, makeDiagramModel } from '../../models/emissions/index'
 import DraggableView from '../draggable/index'
 import TransitionView from '../transition/index'
@@ -10,14 +9,15 @@ import {
   rightGradientColor
 } from '../observable/constants'
 
+let RUNNING_ID = 0
 const PADDING_FACTOR = 0.2
 
 const getInput = emissions => {
   const hasMultipleInputs = emissions.some(Array.isArray)
 
   return hasMultipleInputs ?
-      emissions :
-      [ emissions ]
+    emissions :
+    [ emissions ]
 }
 
 class OperatorDiagram extends PureComponent {
@@ -47,7 +47,7 @@ class OperatorDiagram extends PureComponent {
     completion: this.props.completion
   }
 
-  id = generate()
+  id = 'OperatorDiagram' + (++RUNNING_ID).toString()
 
   processInput = (input, completion) => {
     const { transform, onChange } = this.props

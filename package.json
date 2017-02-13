@@ -54,8 +54,7 @@
   },
   "dependencies": {
     "goethe": "^1.2.1",
-    "react-motion": "^0.4.7",
-    "shortid": "^2.2.6"
+    "react-motion": "^0.4.7"
   },
   "engines": {
     "npm": ">= 2.0.0",

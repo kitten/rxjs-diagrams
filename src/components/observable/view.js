@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react'
-import { generate } from 'shortid';
 
 import { white, blue, black, gray } from '../../constants/colors'
 
@@ -15,6 +14,7 @@ import Emission from './emission'
 import Completion from './completion'
 import makeTransformFactor from './makeTransformFactor'
 
+let RUNNING_ID = 0
 const SEPARATORS = 20
 
 const ObservableView = ({
@@ -34,7 +34,7 @@ const ObservableView = ({
   className
 }) => {
   if (!id) {
-    id = generate()
+    id = 'ObservableView' + (++RUNNING_ID).toString()
   }
 
   const transformFactor = makeTransformFactor({ width, height })
