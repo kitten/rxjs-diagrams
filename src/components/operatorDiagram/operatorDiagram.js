@@ -33,7 +33,7 @@ class OperatorDiagram extends PureComponent {
     x: PropTypes.number,
     y: PropTypes.number,
     fit: PropTypes.bool,
-    style: PropTypes.style
+    style: PropTypes.object
   }
 
   static defaultProps = {
