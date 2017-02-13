@@ -7,7 +7,9 @@ const parameters = {
   damping: 10
 }
 
-const TransitionObservableView = props => (
+const TransitionObservableView = props => typeof window === 'undefined' ? (
+  <EmissionsView {...props} />
+) : (
   <Motion
     defaultStyle={{
       end: 1
