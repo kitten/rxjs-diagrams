@@ -20,9 +20,9 @@ const SEPARATORS = 20
 const ObservableView = ({
   width = 500,
   height = 50,
+  id = '',
   x,
   y,
-  id,
   completion = 1,
   emissions = [],
   onMouseDownEmission,
@@ -33,10 +33,6 @@ const ObservableView = ({
   style,
   className
 }) => {
-  if (!id) {
-    id = 'ObservableView' + (++RUNNING_ID).toString()
-  }
-
   const transformFactor = makeTransformFactor({ width, height })
 
   const last = emissions[emissions.length - 1]

@@ -9,7 +9,6 @@ import {
   rightGradientColor
 } from '../observable/constants'
 
-let RUNNING_ID = 0
 const PADDING_FACTOR = 0.2
 
 const getInput = emissions => {
@@ -46,8 +45,6 @@ class OperatorDiagram extends PureComponent {
   state = {
     completion: this.props.completion
   }
-
-  id = 'OperatorDiagram' + (++RUNNING_ID).toString()
 
   processInput = (input, completion) => {
     const { transform, onChange } = this.props
@@ -90,8 +87,6 @@ class OperatorDiagram extends PureComponent {
   }
 
   render() {
-    const { id } = this
-
     const {
       end,
       width,
@@ -128,7 +123,7 @@ class OperatorDiagram extends PureComponent {
         style={style}
       >
         <defs>
-          <linearGradient id={`${id}-stroke`}>
+          <linearGradient id="stroke">
             <stop offset="0%" stopColor={leftGradientColor}/>
             <stop offset="100%" stopColor={rightGradientColor}/>
           </linearGradient>
@@ -139,7 +134,7 @@ class OperatorDiagram extends PureComponent {
             <DraggableView
               {...this.props}
               key={i}
-              id={`input-${id}-${i}`}
+              id={`input-${i}`}
               emissions={e}
               completion={completion}
               onChangeEmissions={input => this.updateEmissions(i, input)}
@@ -154,14 +149,14 @@ class OperatorDiagram extends PureComponent {
           height={height}
           x={PADDING_FACTOR * width}
           y={height * (input.length - skip) + PADDING_FACTOR * height}
-          stroke={`url(#${id}-stroke)`}
+          stroke="url(#stroke)"
         >
           {label || transfom.toString()}
         </TransformNote>
 
         <TransitionView
           {...this.props}
-          id={`result-${id}`}
+          id="result"
           y={height * (input.length + 1 - skip) + 2 * PADDING_FACTOR * height}
           emissions={output.emissions}
           completion={output.completion}

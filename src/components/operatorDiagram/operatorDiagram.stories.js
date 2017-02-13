@@ -33,7 +33,7 @@ const twoEmissions = [
 
 storiesOf('OperatorDiagram', module)
   .addDecorator(withKnobs)
-  .add('.distinctUntilChanged()', () => (
+  .add('fitting diagram', () => (
     <OperatorDiagram
       width={number('Width', 500)}
       height={number('Height', 50)}
@@ -44,6 +44,25 @@ storiesOf('OperatorDiagram', module)
       completion={completion}
       label=".distinctUntilChanged()"
     />
+  ))
+  .add('double diagrams', () => (
+    <div>
+      <OperatorDiagram
+        emissions={emissions}
+        transform={obs => obs::distinctUntilChanged()}
+        end={end}
+        completion={completion}
+        label=".distinctUntilChanged()"
+      />
+
+      <OperatorDiagram
+        emissions={emissions}
+        transform={obs => obs::distinctUntilChanged()}
+        end={end}
+        completion={completion}
+        label=".distinctUntilChanged()"
+      />
+    </div>
   ))
   .add('.delay(5)', () => (
     <OperatorDiagram
