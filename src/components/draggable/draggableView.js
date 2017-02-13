@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import TransitionView from '../transition/transitionView'
+import { empty } from 'rxjs/observable/fromEvent'
 import { fromEvent } from 'rxjs/observable/fromEvent'
 import { share } from 'rxjs/operator/share'
 import { takeUntil } from 'rxjs/operator/takeUntil'
@@ -8,17 +9,25 @@ import { merge } from 'rxjs/operator/merge'
 import { throttleTime } from 'rxjs/operator/throttleTime'
 import { _finally } from 'rxjs/operator/finally'
 
-const mousemove$ = fromEvent(window, 'mousemove')
-  ::merge(
-    fromEvent(window, 'touchmove')
-      ::map(({ touches }) => touches[0])
-  )
-  ::share()
+const mousemove$ = (
+  typeof window === 'undefined' ?
+    empty() :
+    fromEvent(window, 'mousemove')
+      ::merge(
+        fromEvent(window, 'touchmove')
+          ::map(({ touches }) => touches[0])
+      )
+      ::share()
+)
 
-const mouseup$ = fromEvent(window, 'mouseup')
-  ::merge(fromEvent(window, 'touchend'))
-  ::merge(fromEvent(window, 'touchcancel'))
-  ::share()
+const mouseup$ = (
+  typeof window === 'undefined' ?
+    empty() :
+    fromEvent(window, 'mouseup')
+      ::merge(fromEvent(window, 'touchend'))
+      ::merge(fromEvent(window, 'touchcancel'))
+      ::share()
+)
 
 const transformEmissions = emissions => (
   emissions
