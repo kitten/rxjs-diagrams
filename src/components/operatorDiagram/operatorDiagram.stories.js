@@ -5,6 +5,7 @@ import { delay } from 'rxjs/operator/delay'
 import { switchMap } from 'rxjs/operator/switchMap'
 import { merge } from 'rxjs/operator/merge'
 import { elementAt } from 'rxjs/operator/elementAt'
+import { first } from 'rxjs/operator/first'
 import { combineLatest } from 'rxjs/observable/combineLatest'
 import { of } from 'rxjs/observable/of'
 import { withKnobs, number } from '@kadira/storybook-addon-knobs';
@@ -105,5 +106,14 @@ storiesOf('OperatorDiagram', module)
       end={end}
       completion={completion}
       label=".elementAt(2)"
+    />
+  ))
+  .add('.first()', () => (
+    <OperatorDiagram
+      emissions={emissions}
+      transform={obs => obs::first()}
+      end={end}
+      completion={completion}
+      label=".first()"
     />
   ))
