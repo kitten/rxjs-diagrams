@@ -13,7 +13,10 @@ const mapStreamToEmissions = (scheduler, emission$) => {
       return acc
     }, [])
     ::map(emissions => (
-      makeDiagramModel(emissions, scheduler.now() - COMPLETION_OFFSET)
+      makeDiagramModel(emissions.map(e => (
+        e.x !== scheduler.now() ? e :
+          { ...e, x: scheduler.now() - COMPLETION_OFFSET }
+      )), scheduler.now() - COMPLETION_OFFSET)
     ))
 
   return res

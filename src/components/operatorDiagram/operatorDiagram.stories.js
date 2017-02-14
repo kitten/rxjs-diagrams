@@ -4,6 +4,7 @@ import { distinctUntilChanged } from 'rxjs/operator/distinctUntilChanged'
 import { delay } from 'rxjs/operator/delay'
 import { switchMap } from 'rxjs/operator/switchMap'
 import { merge } from 'rxjs/operator/merge'
+import { elementAt } from 'rxjs/operator/elementAt'
 import { combineLatest } from 'rxjs/observable/combineLatest'
 import { of } from 'rxjs/observable/of'
 import { withKnobs, number } from '@kadira/storybook-addon-knobs';
@@ -95,5 +96,14 @@ storiesOf('OperatorDiagram', module)
       end={end}
       completion={completion}
       label=".switchMap((x) => Observable.of(x, x + 1))"
+    />
+  ))
+  .add('.elementAt(2)', () => (
+    <OperatorDiagram
+      emissions={emissions}
+      transform={obs => obs::elementAt(2)}
+      end={end}
+      completion={completion}
+      label=".elementAt(2)"
     />
   ))

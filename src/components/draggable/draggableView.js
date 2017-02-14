@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import TransitionView from '../transition/transitionView'
+import { COMPLETION_OFFSET } from '../../models/emissions/makeVirtualStream'
 import { empty } from 'rxjs/observable/empty'
 import { fromEvent } from 'rxjs/observable/fromEvent'
 import { share } from 'rxjs/operator/share'
@@ -83,7 +84,7 @@ class DraggableView extends PureComponent {
     const newX = relativeX / range * max
 
     return Math.min(
-      Math.max(isCompletion ? 0.0001 : 0, newX),
+      Math.max(isCompletion ? COMPLETION_OFFSET : 0, newX),
       isCompletion ? max : completion
     )
   }
