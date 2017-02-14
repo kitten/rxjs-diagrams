@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs/Observable'
+import { from } from 'rxjs/observable/from'
 import makeScheduler from './makeScheduler'
 import makeVirtualStream from './makeVirtualStream'
 import makeDiagramModel from './makeDiagramModel'
@@ -10,7 +11,8 @@ const transformEmissions = (transform, completion, ...emissionsArr) => new Obser
     makeVirtualStream(scheduler, makeDiagramModel(emissions, completion))
   ))
 
-  const emission$ = transform(...emission$Arr, scheduler)
+  const emission$ = from(transform(...emission$Arr, scheduler))
+
   const result = mapStreamToEmissions(scheduler, emission$)
   const sub = result.subscribe(observer)
 

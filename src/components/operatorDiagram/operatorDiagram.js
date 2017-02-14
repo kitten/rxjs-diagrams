@@ -59,6 +59,8 @@ class OperatorDiagram extends PureComponent {
       if (onChange) {
         onChange(output)
       }
+    }, err => {
+      console.error(err)
     })
   }
 
