@@ -6,10 +6,20 @@ const selectValue = obj => obj.x
 
 function fromEmissions(arr, range, completion) {
   if (!isEmissionsArr(arr)) {
-    throw new Error([
+    console.error([
       'Expected each value in `emissions` to be an emission',
       '({ x: [number], d: [string] })'
     ].join('. '))
+
+    return props => (
+      <ObservableView
+        {...props}
+        completion={(
+          completion / max
+        )}
+        emissions={[]}
+      />
+    )
   }
 
   const min = Math.min.apply(null, arr.map(selectValue))
