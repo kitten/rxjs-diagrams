@@ -11,7 +11,13 @@ const transformEmissions = (transform, completion, ...emissionsArr) => new Obser
     makeVirtualStream(scheduler, makeDiagramModel(emissions, completion))
   ))
 
-  const emission$ = from(transform(...emission$Arr, scheduler))
+  let emission$
+  try {
+    emission$ = from(transform(...emission$Arr, scheduler))
+  } catch (err) {
+    observer.error(err)
+    return undefined
+  }
 
   const result = mapStreamToEmissions(scheduler, emission$)
   const sub = result.subscribe(observer)
