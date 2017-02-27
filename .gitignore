@@ -13,6 +13,7 @@ node_modules
 
 # Ignore all js files in root, except...
 /*.js
+!webpack.umd.js
 
 # Build folders
 lib/
